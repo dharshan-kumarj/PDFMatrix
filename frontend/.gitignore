@@ -12,6 +12,9 @@ dist
 dist-ssr
 *.local
 
+# WebViewer files (will be copied during setup)
+public/webviewer
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

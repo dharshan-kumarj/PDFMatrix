@@ -7,9 +7,10 @@ import PdfRotation from './components/PdfRotation';
 import PdfToImages from './components/PdfToImages';
 import ImagesToPdf from './components/ImagesToPdf';
 import PdfPageNumbers from './components/PdfPageNumbers';
+import PdfWatermark from './components/PdfWatermark';
 
 function App() {
-  const [activeTab, setActiveTab] = useState<'merger' | 'splitter' | 'compressor' | 'rotation' | 'pdfToImages' | 'imagesToPdf' | 'pageNumbers'>('merger');
+  const [activeTab, setActiveTab] = useState<'merger' | 'splitter' | 'compressor' | 'rotation' | 'pdfToImages' | 'imagesToPdf' | 'pageNumbers' | 'watermark'>('merger');
 
   return (
     <div>
@@ -87,6 +88,16 @@ function App() {
             >
               🔢 Page Numbers
             </button>
+            <button
+              onClick={() => setActiveTab('watermark')}
+              className={`px-6 py-4 font-semibold transition-colors border-b-2 ${
+                activeTab === 'watermark'
+                  ? 'text-teal-600 border-teal-600'
+                  : 'text-gray-500 border-transparent hover:text-gray-700'
+              }`}
+            >
+              💧 Watermark
+            </button>
           </div>
         </div>
       </div>
@@ -99,6 +110,7 @@ function App() {
       {activeTab === 'pdfToImages' && <PdfToImages />}
       {activeTab === 'imagesToPdf' && <ImagesToPdf />}
       {activeTab === 'pageNumbers' && <PdfPageNumbers />}
+      {activeTab === 'watermark' && <PdfWatermark />}
     </div>
   );
 }

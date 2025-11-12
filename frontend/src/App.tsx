@@ -6,9 +6,10 @@ import PdfCompressor from './components/PdfCompressor';
 import PdfRotation from './components/PdfRotation';
 import PdfToImages from './components/PdfToImages';
 import ImagesToPdf from './components/ImagesToPdf';
+import PdfPageNumbers from './components/PdfPageNumbers';
 
 function App() {
-  const [activeTab, setActiveTab] = useState<'merger' | 'splitter' | 'compressor' | 'rotation' | 'pdfToImages' | 'imagesToPdf'>('merger');
+  const [activeTab, setActiveTab] = useState<'merger' | 'splitter' | 'compressor' | 'rotation' | 'pdfToImages' | 'imagesToPdf' | 'pageNumbers'>('merger');
 
   return (
     <div>
@@ -76,6 +77,16 @@ function App() {
             >
               🖼️→📄 Images to PDF
             </button>
+            <button
+              onClick={() => setActiveTab('pageNumbers')}
+              className={`px-6 py-4 font-semibold transition-colors border-b-2 ${
+                activeTab === 'pageNumbers'
+                  ? 'text-cyan-600 border-cyan-600'
+                  : 'text-gray-500 border-transparent hover:text-gray-700'
+              }`}
+            >
+              🔢 Page Numbers
+            </button>
           </div>
         </div>
       </div>
@@ -87,6 +98,7 @@ function App() {
       {activeTab === 'rotation' && <PdfRotation />}
       {activeTab === 'pdfToImages' && <PdfToImages />}
       {activeTab === 'imagesToPdf' && <ImagesToPdf />}
+      {activeTab === 'pageNumbers' && <PdfPageNumbers />}
     </div>
   );
 }

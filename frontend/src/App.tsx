@@ -8,10 +8,12 @@ import PdfToImages from './components/PdfToImages';
 import ImagesToPdf from './components/ImagesToPdf';
 import PdfPageNumbers from './components/PdfPageNumbers';
 import PdfWatermark from './components/PdfWatermark';
+import PdfResize from './components/PdfResize';
+import PdfReorder from './components/PdfReorder';
 // import PdfPasswordProtection from './components/PdfPasswordProtection'; // TODO: Implement with backend for real encryption
 
 function App() {
-  const [activeTab, setActiveTab] = useState<'merger' | 'splitter' | 'compressor' | 'rotation' | 'pdfToImages' | 'imagesToPdf' | 'pageNumbers' | 'watermark'>('merger');
+  const [activeTab, setActiveTab] = useState<'merger' | 'splitter' | 'compressor' | 'rotation' | 'pdfToImages' | 'imagesToPdf' | 'pageNumbers' | 'watermark' | 'resize' | 'reorder'>('merger');
 
   return (
     <div>
@@ -99,6 +101,26 @@ function App() {
             >
               💧 Watermark
             </button>
+            <button
+              onClick={() => setActiveTab('resize')}
+              className={`px-6 py-4 font-semibold transition-colors border-b-2 ${
+                activeTab === 'resize'
+                  ? 'text-violet-600 border-violet-600'
+                  : 'text-gray-500 border-transparent hover:text-gray-700'
+              }`}
+            >
+              📐 Resize Pages
+            </button>
+            <button
+              onClick={() => setActiveTab('reorder')}
+              className={`px-6 py-4 font-semibold transition-colors border-b-2 ${
+                activeTab === 'reorder'
+                  ? 'text-indigo-600 border-indigo-600'
+                  : 'text-gray-500 border-transparent hover:text-gray-700'
+              }`}
+            >
+              🔄 Reorder Pages
+            </button>
             {/* TODO: Add Password Protection when backend encryption is implemented */}
             {/* <button
               onClick={() => setActiveTab('password')}
@@ -123,6 +145,8 @@ function App() {
       {activeTab === 'imagesToPdf' && <ImagesToPdf />}
       {activeTab === 'pageNumbers' && <PdfPageNumbers />}
       {activeTab === 'watermark' && <PdfWatermark />}
+      {activeTab === 'resize' && <PdfResize />}
+      {activeTab === 'reorder' && <PdfReorder />}
       {/* {activeTab === 'password' && <PdfPasswordProtection />} */}
     </div>
   );

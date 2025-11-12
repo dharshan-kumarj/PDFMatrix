@@ -70,7 +70,8 @@ const PdfReorder: React.FC = () => {
         await page.render({
           canvasContext: context,
           viewport: viewport,
-        }).promise;
+          canvas: canvas,
+        } as any).promise;
 
         const thumbnail = canvas.toDataURL('image/png');
         
@@ -304,38 +305,38 @@ const PdfReorder: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-transparent p-4 sm:p-6 lg:p-8">
+    <div className="min-h-screen bg-gradient-to-br from-indigo-50 to-blue-100 p-8">
       <div className="max-w-7xl mx-auto">
         <div className="bg-white rounded-2xl shadow-xl p-8">
           <div className="text-center mb-8">
-            <h1 className="text-4xl font-bold text-white mb-2">
+            <h1 className="text-4xl font-bold text-gray-800 mb-2">
               🔄 Reorder PDF Pages
             </h1>
-            <p className="text-gray-300">
+            <p className="text-gray-600">
               Drag-and-drop, reorder, duplicate, and delete pages
             </p>
           </div>
 
           {/* File Upload */}
           <div className="mb-8">
-            <label className="block text-sm font-semibold text-green-400 mb-3">
+            <label className="block text-sm font-semibold text-gray-700 mb-3">
               📄 Select PDF File
             </label>
             <input
               type="file"
               accept=".pdf,application/pdf"
               onChange={handleFileChange}
-              className="block w-full text-sm text-gray-400
+              className="block w-full text-sm text-gray-500
                 file:mr-4 file:py-3 file:px-6
-                file:rounded-xl file:border-0
+                file:rounded-lg file:border-0
                 file:text-sm file:font-semibold
-                file:bg-gradient-to-r file:from-green-500 file:to-emerald-600 file:text-black file:shadow-lg file:shadow-green-500/30
-                hover:file:from-green-400 hover:file:to-emerald-500 file:cursor-pointer
+                file:bg-indigo-50 file:text-indigo-700
+                hover:file:bg-indigo-100 file:cursor-pointer
                 cursor-pointer border-2 border-dashed border-gray-300
-                rounded-xl p-4 hover:border-indigo-400 transition-colors"
+                rounded-lg p-4 hover:border-indigo-400 transition-colors"
             />
             {pdfFile && (
-              <p className="mt-3 text-sm text-gray-300 bg-green-500/20 p-3 rounded-xl">
+              <p className="mt-3 text-sm text-gray-600 bg-indigo-50 p-3 rounded-lg">
                 ✓ Selected: <span className="font-semibold">{pdfFile.name}</span>
                 {' - '}
                 <span className="font-semibold">{pages.length} pages</span>
@@ -346,8 +347,8 @@ const PdfReorder: React.FC = () => {
           {/* Loading State */}
           {loading && (
             <div className="text-center py-12">
-              <div className="inline-block animate-spin rounded-full h-16 w-16 border-4 border-green-500 border-t-transparent"></div>
-              <p className="mt-4 text-gray-300 font-semibold">Loading pages and generating thumbnails...</p>
+              <div className="inline-block animate-spin rounded-full h-16 w-16 border-4 border-indigo-500 border-t-transparent"></div>
+              <p className="mt-4 text-gray-600 font-semibold">Loading pages and generating thumbnails...</p>
             </div>
           )}
 
@@ -357,16 +358,16 @@ const PdfReorder: React.FC = () => {
               <div className="flex flex-wrap gap-3">
                 <button
                   onClick={handleSelectAll}
-                  className="px-4 py-2 bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-xl font-semibold hover:from-green-400 hover:to-emerald-500 transition-colors"
+                  className="px-4 py-2 bg-indigo-600 text-white rounded-lg font-semibold hover:bg-indigo-700 transition-colors"
                 >
                   {selectedPages.size === pages.length ? '❌ Deselect All' : '✅ Select All'}
                 </button>
                 <button
                   onClick={deleteSelectedPages}
                   disabled={selectedPages.size === 0}
-                  className={`px-4 py-2 rounded-xl font-semibold transition-colors ${
+                  className={`px-4 py-2 rounded-lg font-semibold transition-colors ${
                     selectedPages.size === 0
-                      ? 'bg-gray-300 text-gray-400 cursor-not-allowed'
+                      ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
                       : 'bg-red-600 text-white hover:bg-red-700'
                   }`}
                 >
@@ -375,17 +376,17 @@ const PdfReorder: React.FC = () => {
                 <button
                   onClick={duplicateSelectedPages}
                   disabled={selectedPages.size === 0}
-                  className={`px-4 py-2 rounded-xl font-semibold transition-colors ${
+                  className={`px-4 py-2 rounded-lg font-semibold transition-colors ${
                     selectedPages.size === 0
-                      ? 'bg-gray-300 text-gray-400 cursor-not-allowed'
-                      : 'bg-gradient-to-r from-green-500 to-emerald-600 text-white hover:from-green-400 hover:to-emerald-500'
+                      ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                      : 'bg-green-600 text-white hover:bg-green-700'
                   }`}
                 >
                   📋 Duplicate Selected ({selectedPages.size})
                 </button>
                 <button
                   onClick={reverseOrder}
-                  className="px-4 py-2 bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-xl font-semibold hover:from-green-400 hover:to-emerald-500 transition-colors"
+                  className="px-4 py-2 bg-purple-600 text-white rounded-lg font-semibold hover:bg-purple-700 transition-colors"
                 >
                   🔃 Reverse Order
                 </button>
@@ -393,10 +394,10 @@ const PdfReorder: React.FC = () => {
                   <button
                     onClick={generateReorderedPdf}
                     disabled={generating}
-                    className={`px-6 py-2 rounded-xl font-bold transition-colors ${
+                    className={`px-6 py-2 rounded-lg font-bold transition-colors ${
                       generating
-                        ? 'bg-gray-300 text-gray-400 cursor-not-allowed'
-                        : 'bg-gradient-to-r from-green-500 to-emerald-600 text-black font-bold hover:from-green-400 hover:to-emerald-500'
+                        ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                        : 'bg-gradient-to-r from-indigo-500 to-blue-600 text-white hover:from-indigo-600 hover:to-blue-700'
                     }`}
                   >
                     {generating ? '⏳ Generating...' : '💾 Save Reordered PDF'}
@@ -434,12 +435,12 @@ const PdfReorder: React.FC = () => {
                   </div>
 
                   {/* Page Number Badge */}
-                  <div className="absolute top-2 right-2 bg-gradient-to-r from-green-500 to-emerald-600 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg z-10">
+                  <div className="absolute top-2 right-2 bg-indigo-600 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg z-10">
                     {index + 1}
                   </div>
 
                   {/* Thumbnail */}
-                  <div className="aspect-[3/4] bg-gray-800/50 flex items-center justify-center overflow-hidden">
+                  <div className="aspect-[3/4] bg-gray-100 flex items-center justify-center overflow-hidden">
                     <img
                       src={page.thumbnail}
                       alt={`Page ${index + 1}`}
@@ -448,15 +449,15 @@ const PdfReorder: React.FC = () => {
                   </div>
 
                   {/* Action Buttons */}
-                  <div className="p-3 bg-gradient-to-r from-gray-800 to-gray-900 space-y-2">
+                  <div className="p-3 bg-gray-50 space-y-2">
                     <div className="grid grid-cols-2 gap-2">
                       <button
                         onClick={() => movePageUp(page.id)}
                         disabled={index === 0}
-                        className={`p-2 rounded-xl text-sm font-semibold transition-colors ${
+                        className={`p-2 rounded-lg text-sm font-semibold transition-colors ${
                           index === 0
                             ? 'bg-gray-200 text-gray-400 cursor-not-allowed'
-                            : 'bg-green-500 text-black hover:bg-gradient-to-r from-green-500 to-emerald-600'
+                            : 'bg-blue-500 text-white hover:bg-blue-600'
                         }`}
                         title="Move Up"
                       >
@@ -465,10 +466,10 @@ const PdfReorder: React.FC = () => {
                       <button
                         onClick={() => movePageDown(page.id)}
                         disabled={index === pages.length - 1}
-                        className={`p-2 rounded-xl text-sm font-semibold transition-colors ${
+                        className={`p-2 rounded-lg text-sm font-semibold transition-colors ${
                           index === pages.length - 1
                             ? 'bg-gray-200 text-gray-400 cursor-not-allowed'
-                            : 'bg-green-500 text-black hover:bg-gradient-to-r from-green-500 to-emerald-600'
+                            : 'bg-blue-500 text-white hover:bg-blue-600'
                         }`}
                         title="Move Down"
                       >
@@ -478,7 +479,7 @@ const PdfReorder: React.FC = () => {
                     <div className="grid grid-cols-2 gap-2">
                       <button
                         onClick={() => duplicatePage(page.id)}
-                        className="p-2 rounded-xl text-sm font-semibold bg-green-500 text-black hover:bg-gradient-to-r from-green-500 to-emerald-600 transition-colors"
+                        className="p-2 rounded-lg text-sm font-semibold bg-green-500 text-white hover:bg-green-600 transition-colors"
                         title="Duplicate"
                       >
                         📋
@@ -486,7 +487,7 @@ const PdfReorder: React.FC = () => {
                       <button
                         onClick={() => deletePage(page.id)}
                         disabled={pages.length === 1}
-                        className={`p-2 rounded-xl text-sm font-semibold transition-colors ${
+                        className={`p-2 rounded-lg text-sm font-semibold transition-colors ${
                           pages.length === 1
                             ? 'bg-gray-200 text-gray-400 cursor-not-allowed'
                             : 'bg-red-500 text-white hover:bg-red-600'
@@ -496,7 +497,7 @@ const PdfReorder: React.FC = () => {
                         🗑️
                       </button>
                     </div>
-                    <div className="text-xs text-gray-400 text-center mt-2">
+                    <div className="text-xs text-gray-500 text-center mt-2">
                       Original: Page {page.pageNumber}
                     </div>
                   </div>
@@ -507,7 +508,7 @@ const PdfReorder: React.FC = () => {
 
           {/* Empty State */}
           {!loading && pages.length === 0 && pdfFile && (
-            <div className="text-center py-12 text-gray-400">
+            <div className="text-center py-12 text-gray-500">
               <p className="text-lg">No pages loaded. Please try selecting a different PDF file.</p>
             </div>
           )}
@@ -518,7 +519,7 @@ const PdfReorder: React.FC = () => {
               <h3 className="font-semibold text-blue-900 mb-3 flex items-center gap-2">
                 <span>💡</span> How to Reorder Pages
               </h3>
-              <ul className="space-y-2 text-sm text-green-400">
+              <ul className="space-y-2 text-sm text-blue-800">
                 <li className="flex items-start gap-2">
                   <span className="text-blue-500 mt-1">•</span>
                   <span><strong>Drag & Drop:</strong> Click and drag any page thumbnail to reorder</span>

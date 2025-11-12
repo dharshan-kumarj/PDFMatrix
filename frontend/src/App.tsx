@@ -3,9 +3,10 @@ import './App.css';
 import PdfMerger from './components/PdfMerger';
 import PdfSplitter from './components/PdfSplitter';
 import PdfCompressor from './components/PdfCompressor';
+import PdfRotation from './components/PdfRotation';
 
 function App() {
-  const [activeTab, setActiveTab] = useState<'merger' | 'splitter' | 'compressor'>('merger');
+  const [activeTab, setActiveTab] = useState<'merger' | 'splitter' | 'compressor' | 'rotation'>('merger');
 
   return (
     <div>
@@ -43,6 +44,16 @@ function App() {
             >
               🗜️ PDF Compressor
             </button>
+            <button
+              onClick={() => setActiveTab('rotation')}
+              className={`px-6 py-4 font-semibold transition-colors border-b-2 ${
+                activeTab === 'rotation'
+                  ? 'text-orange-600 border-orange-600'
+                  : 'text-gray-500 border-transparent hover:text-gray-700'
+              }`}
+            >
+              🔄 PDF Rotation
+            </button>
           </div>
         </div>
       </div>
@@ -51,6 +62,7 @@ function App() {
       {activeTab === 'merger' && <PdfMerger />}
       {activeTab === 'splitter' && <PdfSplitter />}
       {activeTab === 'compressor' && <PdfCompressor />}
+      {activeTab === 'rotation' && <PdfRotation />}
     </div>
   );
 }

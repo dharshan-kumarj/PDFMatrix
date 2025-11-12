@@ -53,8 +53,12 @@ function App() {
         {/* Logo Section */}
         <div className="p-6 border-b border-green-500/20">
           <div className="flex items-center gap-3">
-            <div className="w-12 h-12 bg-gradient-to-br from-green-400 to-emerald-600 rounded-xl flex items-center justify-center shadow-lg shadow-green-500/50">
-              <span className="text-2xl font-bold text-black">P</span>
+            <div className="w-12 h-12  rounded-xl flex items-center justify-center shadow-lg shadow-green-500/50 p-2">
+              <img 
+                src="/favicon.svg" 
+                alt="PDFMatrix Logo" 
+                className="w-full h-full object-contain"
+              />
             </div>
             <div>
               <h1 className="text-2xl font-bold bg-gradient-to-r from-green-400 to-emerald-400 bg-clip-text text-transparent">

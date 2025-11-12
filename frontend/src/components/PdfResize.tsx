@@ -290,45 +290,45 @@ const PdfResize: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-violet-50 to-purple-100 p-8">
+    <div className="min-h-screen bg-transparent p-4 sm:p-6 lg:p-8">
       <div className="max-w-4xl mx-auto">
         <div className="bg-white rounded-2xl shadow-xl p-8">
           <div className="text-center mb-8">
-            <h1 className="text-4xl font-bold text-gray-800 mb-2">
+            <h1 className="text-4xl font-bold text-gray-100 mb-2">
               📐 Resize PDF Pages
             </h1>
-            <p className="text-gray-600">
+            <p className="text-gray-300">
               Change page size, fit content, and crop margins
             </p>
           </div>
 
           {/* File Upload */}
           <div className="mb-8">
-            <label className="block text-sm font-semibold text-gray-700 mb-3">
+            <label className="block text-sm font-semibold text-green-400 mb-3">
               📄 Select PDF File
             </label>
             <input
               type="file"
               accept=".pdf,application/pdf"
               onChange={handleFileChange}
-              className="block w-full text-sm text-gray-500
+              className="block w-full text-sm text-gray-400
                 file:mr-4 file:py-3 file:px-6
-                file:rounded-lg file:border-0
+                file:rounded-xl file:border-0
                 file:text-sm file:font-semibold
-                file:bg-violet-50 file:text-violet-700
-                hover:file:bg-violet-100 file:cursor-pointer
+                file:bg-gradient-to-r file:from-green-500 file:to-emerald-600 file:text-black file:shadow-lg file:shadow-green-500/30
+                hover:file:from-green-400 hover:file:to-emerald-500 file:cursor-pointer
                 cursor-pointer border-2 border-dashed border-gray-300
-                rounded-lg p-4 hover:border-violet-400 transition-colors"
+                rounded-xl p-4 hover:border-violet-400 transition-colors"
             />
             {pdfFile && (
-              <div className="mt-3 text-sm bg-violet-50 p-4 rounded-lg space-y-2">
-                <p className="text-gray-600">
+              <div className="mt-3 text-sm bg-violet-50 p-4 rounded-xl space-y-2">
+                <p className="text-gray-300">
                   ✓ Selected: <span className="font-semibold">{pdfFile.name}</span>
                 </p>
-                <p className="text-gray-600">
+                <p className="text-gray-300">
                   📄 Pages: <span className="font-semibold">{pageCount}</span>
                 </p>
-                <p className="text-gray-600">
+                <p className="text-gray-300">
                   📏 Current Size: <span className="font-semibold">{currentPageSize}</span>
                 </p>
               </div>
@@ -337,20 +337,20 @@ const PdfResize: React.FC = () => {
 
           {/* Target Page Size */}
           <div className="mb-8 bg-gradient-to-r from-violet-50 to-purple-50 rounded-xl p-6 border-2 border-violet-200">
-            <h3 className="text-lg font-semibold text-gray-800 mb-4 flex items-center gap-2">
+            <h3 className="text-lg font-semibold text-gray-100 mb-4 flex items-center gap-2">
               <span>📏</span> Target Page Size
             </h3>
 
             <div className="grid md:grid-cols-2 gap-6">
               {/* Page Size Preset */}
               <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-3">
+                <label className="block text-sm font-semibold text-green-400 mb-3">
                   Page Size
                 </label>
                 <select
                   value={targetPageSize}
                   onChange={(e) => setTargetPageSize(e.target.value as PageSize)}
-                  className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent"
+                  className="w-full px-4 py-3 border-2 border-gray-300 rounded-xl focus:ring-2 focus:ring-violet-500 focus:border-transparent"
                 >
                   <option value="A4">A4 (595 x 842 pt)</option>
                   <option value="Letter">Letter (612 x 792 pt)</option>
@@ -364,26 +364,26 @@ const PdfResize: React.FC = () => {
 
               {/* Orientation */}
               <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-3">
+                <label className="block text-sm font-semibold text-green-400 mb-3">
                   Orientation
                 </label>
                 <div className="flex gap-3">
                   <button
                     onClick={() => setOrientation('portrait')}
-                    className={`flex-1 py-3 px-4 rounded-lg font-semibold transition-all ${
+                    className={`flex-1 py-3 px-4 rounded-xl font-semibold transition-all ${
                       orientation === 'portrait'
-                        ? 'bg-violet-600 text-white shadow-lg'
-                        : 'bg-white border-2 border-gray-300 text-gray-700 hover:border-violet-400'
+                        ? 'bg-gradient-to-r from-green-500 to-emerald-600 text-white shadow-lg'
+                        : 'bg-white border-2 border-gray-300 text-green-400 hover:border-violet-400'
                     }`}
                   >
                     📄 Portrait
                   </button>
                   <button
                     onClick={() => setOrientation('landscape')}
-                    className={`flex-1 py-3 px-4 rounded-lg font-semibold transition-all ${
+                    className={`flex-1 py-3 px-4 rounded-xl font-semibold transition-all ${
                       orientation === 'landscape'
-                        ? 'bg-violet-600 text-white shadow-lg'
-                        : 'bg-white border-2 border-gray-300 text-gray-700 hover:border-violet-400'
+                        ? 'bg-gradient-to-r from-green-500 to-emerald-600 text-white shadow-lg'
+                        : 'bg-white border-2 border-gray-300 text-green-400 hover:border-violet-400'
                     }`}
                   >
                     📄 Landscape
@@ -395,7 +395,7 @@ const PdfResize: React.FC = () => {
               {targetPageSize === 'Custom' && (
                 <>
                   <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-3">
+                    <label className="block text-sm font-semibold text-green-400 mb-3">
                       Width (points)
                     </label>
                     <input
@@ -404,14 +404,14 @@ const PdfResize: React.FC = () => {
                       max="2000"
                       value={customWidth}
                       onChange={(e) => setCustomWidth(Number(e.target.value))}
-                      className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent"
+                      className="w-full px-4 py-3 border-2 border-gray-300 rounded-xl focus:ring-2 focus:ring-violet-500 focus:border-transparent"
                     />
-                    <p className="text-xs text-gray-500 mt-1">
+                    <p className="text-xs text-gray-400 mt-1">
                       {(customWidth / 72).toFixed(2)} inches
                     </p>
                   </div>
                   <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-3">
+                    <label className="block text-sm font-semibold text-green-400 mb-3">
                       Height (points)
                     </label>
                     <input
@@ -420,9 +420,9 @@ const PdfResize: React.FC = () => {
                       max="3000"
                       value={customHeight}
                       onChange={(e) => setCustomHeight(Number(e.target.value))}
-                      className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent"
+                      className="w-full px-4 py-3 border-2 border-gray-300 rounded-xl focus:ring-2 focus:ring-violet-500 focus:border-transparent"
                     />
-                    <p className="text-xs text-gray-500 mt-1">
+                    <p className="text-xs text-gray-400 mt-1">
                       {(customHeight / 72).toFixed(2)} inches
                     </p>
                   </div>
@@ -431,8 +431,8 @@ const PdfResize: React.FC = () => {
             </div>
 
             {/* Target Size Info */}
-            <div className="mt-4 bg-white rounded-lg p-4 border-2 border-gray-200">
-              <p className="text-sm text-gray-600">
+            <div className="mt-4 bg-white rounded-xl p-4 border-2 border-green-500/20">
+              <p className="text-sm text-gray-300">
                 📐 Target: <span className="font-semibold">
                   {Math.round(getTargetDimensions().width)} x {Math.round(getTargetDimensions().height)} points
                   ({(getTargetDimensions().width / 72).toFixed(2)} x {(getTargetDimensions().height / 72).toFixed(2)} inches)
@@ -443,17 +443,17 @@ const PdfResize: React.FC = () => {
 
           {/* Fit Mode */}
           <div className="mb-8 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl p-6 border-2 border-blue-200">
-            <h3 className="text-lg font-semibold text-gray-800 mb-4 flex items-center gap-2">
+            <h3 className="text-lg font-semibold text-gray-100 mb-4 flex items-center gap-2">
               <span>🎯</span> Content Fitting Mode
             </h3>
 
             <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
               <button
                 onClick={() => setFitMode('fit')}
-                className={`py-4 px-4 rounded-lg font-semibold transition-all ${
+                className={`py-4 px-4 rounded-xl font-semibold transition-all ${
                   fitMode === 'fit'
-                    ? 'bg-blue-600 text-white shadow-lg'
-                    : 'bg-white border-2 border-gray-300 text-gray-700 hover:border-blue-400'
+                    ? 'bg-gradient-to-r from-green-500 to-emerald-600 text-white shadow-lg'
+                    : 'bg-white border-2 border-gray-300 text-green-400 hover:border-blue-400'
                 }`}
               >
                 <div className="text-2xl mb-1">📦</div>
@@ -461,10 +461,10 @@ const PdfResize: React.FC = () => {
               </button>
               <button
                 onClick={() => setFitMode('fill')}
-                className={`py-4 px-4 rounded-lg font-semibold transition-all ${
+                className={`py-4 px-4 rounded-xl font-semibold transition-all ${
                   fitMode === 'fill'
-                    ? 'bg-blue-600 text-white shadow-lg'
-                    : 'bg-white border-2 border-gray-300 text-gray-700 hover:border-blue-400'
+                    ? 'bg-gradient-to-r from-green-500 to-emerald-600 text-white shadow-lg'
+                    : 'bg-white border-2 border-gray-300 text-green-400 hover:border-blue-400'
                 }`}
               >
                 <div className="text-2xl mb-1">📐</div>
@@ -472,10 +472,10 @@ const PdfResize: React.FC = () => {
               </button>
               <button
                 onClick={() => setFitMode('stretch')}
-                className={`py-4 px-4 rounded-lg font-semibold transition-all ${
+                className={`py-4 px-4 rounded-xl font-semibold transition-all ${
                   fitMode === 'stretch'
-                    ? 'bg-blue-600 text-white shadow-lg'
-                    : 'bg-white border-2 border-gray-300 text-gray-700 hover:border-blue-400'
+                    ? 'bg-gradient-to-r from-green-500 to-emerald-600 text-white shadow-lg'
+                    : 'bg-white border-2 border-gray-300 text-green-400 hover:border-blue-400'
                 }`}
               >
                 <div className="text-2xl mb-1">↔️</div>
@@ -483,10 +483,10 @@ const PdfResize: React.FC = () => {
               </button>
               <button
                 onClick={() => setFitMode('none')}
-                className={`py-4 px-4 rounded-lg font-semibold transition-all ${
+                className={`py-4 px-4 rounded-xl font-semibold transition-all ${
                   fitMode === 'none'
-                    ? 'bg-blue-600 text-white shadow-lg'
-                    : 'bg-white border-2 border-gray-300 text-gray-700 hover:border-blue-400'
+                    ? 'bg-gradient-to-r from-green-500 to-emerald-600 text-white shadow-lg'
+                    : 'bg-white border-2 border-gray-300 text-green-400 hover:border-blue-400'
                 }`}
               >
                 <div className="text-2xl mb-1">⊡</div>
@@ -494,8 +494,8 @@ const PdfResize: React.FC = () => {
               </button>
             </div>
 
-            <div className="mt-4 bg-white rounded-lg p-4 border-2 border-gray-200">
-              <p className="text-sm text-gray-600">
+            <div className="mt-4 bg-white rounded-xl p-4 border-2 border-green-500/20">
+              <p className="text-sm text-gray-300">
                 {fitMode === 'fit' && '📦 Fit: Scales content proportionally to fit within page (maintains aspect ratio)'}
                 {fitMode === 'fill' && '📐 Fill: Scales content proportionally to fill entire page (may crop edges)'}
                 {fitMode === 'stretch' && '↔️ Stretch: Stretches content to fill page (may distort aspect ratio)'}
@@ -508,10 +508,10 @@ const PdfResize: React.FC = () => {
           <div className="mb-8 bg-gradient-to-r from-orange-50 to-red-50 rounded-xl p-6 border-2 border-orange-200">
             <div className="flex items-start justify-between mb-4">
               <div>
-                <h3 className="text-lg font-semibold text-gray-800 flex items-center gap-2">
+                <h3 className="text-lg font-semibold text-gray-100 flex items-center gap-2">
                   <span>✂️</span> Crop Margins
                 </h3>
-                <p className="text-sm text-gray-600 mt-1">
+                <p className="text-sm text-gray-300 mt-1">
                   Remove margins from pages before resizing
                 </p>
               </div>
@@ -522,14 +522,14 @@ const PdfResize: React.FC = () => {
                   onChange={(e) => setCropMargins(e.target.checked)}
                   className="w-5 h-5 text-orange-600 border-gray-300 rounded focus:ring-orange-500 cursor-pointer"
                 />
-                <span className="text-sm font-semibold text-gray-700">Enable</span>
+                <span className="text-sm font-semibold text-green-400">Enable</span>
               </label>
             </div>
 
             {cropMargins && (
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                 <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-2">
+                  <label className="block text-sm font-semibold text-green-400 mb-2">
                     Top (pt)
                   </label>
                   <input
@@ -538,11 +538,11 @@ const PdfResize: React.FC = () => {
                     max="200"
                     value={marginTop}
                     onChange={(e) => setMarginTop(Number(e.target.value))}
-                    className="w-full px-3 py-2 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                    className="w-full px-3 py-2 border-2 border-gray-300 rounded-xl focus:ring-2 focus:ring-orange-500 focus:border-transparent"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-2">
+                  <label className="block text-sm font-semibold text-green-400 mb-2">
                     Right (pt)
                   </label>
                   <input
@@ -551,11 +551,11 @@ const PdfResize: React.FC = () => {
                     max="200"
                     value={marginRight}
                     onChange={(e) => setMarginRight(Number(e.target.value))}
-                    className="w-full px-3 py-2 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                    className="w-full px-3 py-2 border-2 border-gray-300 rounded-xl focus:ring-2 focus:ring-orange-500 focus:border-transparent"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-2">
+                  <label className="block text-sm font-semibold text-green-400 mb-2">
                     Bottom (pt)
                   </label>
                   <input
@@ -564,11 +564,11 @@ const PdfResize: React.FC = () => {
                     max="200"
                     value={marginBottom}
                     onChange={(e) => setMarginBottom(Number(e.target.value))}
-                    className="w-full px-3 py-2 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                    className="w-full px-3 py-2 border-2 border-gray-300 rounded-xl focus:ring-2 focus:ring-orange-500 focus:border-transparent"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-2">
+                  <label className="block text-sm font-semibold text-green-400 mb-2">
                     Left (pt)
                   </label>
                   <input
@@ -577,7 +577,7 @@ const PdfResize: React.FC = () => {
                     max="200"
                     value={marginLeft}
                     onChange={(e) => setMarginLeft(Number(e.target.value))}
-                    className="w-full px-3 py-2 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                    className="w-full px-3 py-2 border-2 border-gray-300 rounded-xl focus:ring-2 focus:ring-orange-500 focus:border-transparent"
                   />
                 </div>
               </div>
@@ -585,8 +585,8 @@ const PdfResize: React.FC = () => {
           </div>
 
           {/* Page Selection */}
-          <div className="mb-8 bg-gray-50 rounded-xl p-6">
-            <h3 className="text-sm font-semibold text-gray-700 mb-4">
+          <div className="mb-8 bg-gradient-to-r from-gray-800 to-gray-900 rounded-xl p-6">
+            <h3 className="text-sm font-semibold text-green-400 mb-4">
               📄 Apply To Pages
             </h3>
             <div className="space-y-4">
@@ -597,7 +597,7 @@ const PdfResize: React.FC = () => {
                   onChange={() => setApplyToAllPages(true)}
                   className="w-5 h-5 text-violet-600 border-gray-300 focus:ring-violet-500 cursor-pointer"
                 />
-                <span className="text-gray-700">Apply to all pages</span>
+                <span className="text-green-400">Apply to all pages</span>
               </label>
               <label className="flex items-center gap-3 cursor-pointer">
                 <input
@@ -606,7 +606,7 @@ const PdfResize: React.FC = () => {
                   onChange={() => setApplyToAllPages(false)}
                   className="w-5 h-5 text-violet-600 border-gray-300 focus:ring-violet-500 cursor-pointer"
                 />
-                <span className="text-gray-700">Apply to specific pages</span>
+                <span className="text-green-400">Apply to specific pages</span>
               </label>
               {!applyToAllPages && (
                 <input
@@ -614,7 +614,7 @@ const PdfResize: React.FC = () => {
                   value={specificPages}
                   onChange={(e) => setSpecificPages(e.target.value)}
                   placeholder="e.g., 1,3,5-7,10"
-                  className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-violet-500 focus:border-transparent"
+                  className="w-full px-4 py-3 border-2 border-gray-300 rounded-xl focus:ring-2 focus:ring-violet-500 focus:border-transparent"
                 />
               )}
             </div>
@@ -626,7 +626,7 @@ const PdfResize: React.FC = () => {
             disabled={!pdfFile || loading}
             className={`w-full py-4 px-6 rounded-xl font-bold text-lg shadow-lg transition-all ${
               !pdfFile || loading
-                ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                ? 'bg-gray-300 text-gray-400 cursor-not-allowed'
                 : 'bg-gradient-to-r from-violet-500 to-purple-600 text-white hover:from-violet-600 hover:to-purple-700 transform hover:scale-[1.02]'
             }`}
           >
@@ -660,7 +660,7 @@ const PdfResize: React.FC = () => {
             <h3 className="font-semibold text-blue-900 mb-3 flex items-center gap-2">
               <span>💡</span> Resize Tips
             </h3>
-            <ul className="space-y-2 text-sm text-blue-800">
+            <ul className="space-y-2 text-sm text-green-400">
               <li className="flex items-start gap-2">
                 <span className="text-blue-500 mt-1">•</span>
                 <span><strong>Fit Mode:</strong> Best for maintaining quality - scales content proportionally to fit in target size</span>

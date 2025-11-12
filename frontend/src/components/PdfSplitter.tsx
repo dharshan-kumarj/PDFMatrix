@@ -267,31 +267,47 @@ const PdfSplitter: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 to-pink-100 p-8">
+    <div className="min-h-screen bg-transparent p-4 sm:p-6 lg:p-8">
       <div className="max-w-5xl mx-auto">
-        <div className="bg-white rounded-lg shadow-xl p-8">
-          <h1 className="text-3xl font-bold text-gray-800 mb-6">📄 PDF Splitter</h1>
+        <div className="bg-gradient-to-br from-gray-900 to-black rounded-2xl shadow-2xl border border-green-500/20 p-6 sm:p-8">
+          <div className="mb-6 pb-4 border-b border-green-500/20">
+            <h1 className="text-3xl font-bold bg-gradient-to-r from-green-400 to-emerald-400 bg-clip-text text-transparent mb-2">
+              📄 PDF Splitter
+            </h1>
+            <p className="text-gray-400 text-sm">
+              Split PDF into multiple parts or extract specific pages
+            </p>
+          </div>
 
           {/* File Upload Section */}
           <div className="mb-6">
-            <label className="block mb-2 text-sm font-medium text-gray-700">
+            <label className="block mb-3 text-sm font-semibold text-green-400">
               Select PDF file to split
             </label>
-            <input
-              type="file"
-              accept="application/pdf"
-              onChange={handleFileSelect}
-              className="block w-full text-sm text-gray-500
-                file:mr-4 file:py-2 file:px-4
-                file:rounded-md file:border-0
-                file:text-sm file:font-semibold
-                file:bg-purple-50 file:text-purple-700
-                hover:file:bg-purple-100
-                cursor-pointer"
-            />
+            <div className="relative">
+              <input
+                type="file"
+                accept="application/pdf"
+                onChange={handleFileSelect}
+                className="block w-full text-sm text-gray-400
+                  file:mr-4 file:py-3 file:px-6
+                  file:rounded-lg file:border-0
+                  file:text-sm file:font-semibold
+                  file:bg-gradient-to-r file:from-green-500 file:to-emerald-600
+                  file:text-black file:shadow-lg file:shadow-green-500/30
+                  hover:file:from-green-400 hover:file:to-emerald-500
+                  file:transition-all file:duration-200
+                  cursor-pointer
+                  bg-gray-800/50 border-2 border-green-500/30 rounded-lg p-3
+                  hover:border-green-500/50 transition-colors"
+              />
+            </div>
             {pdfFile && (
-              <p className="mt-2 text-sm text-gray-600">
-                📄 <strong>{pdfFile.name}</strong> - {totalPages} pages
+              <p className="mt-3 text-sm text-gray-300 flex items-center gap-2">
+                <span className="text-green-400">📄</span> 
+                <strong className="text-green-400">{pdfFile.name}</strong> 
+                <span className="text-gray-500">-</span>
+                <span className="text-gray-400">{totalPages} pages</span>
               </p>
             )}
           </div>

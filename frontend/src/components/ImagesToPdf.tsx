@@ -250,14 +250,14 @@ const ImagesToPdf: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-pink-50 to-purple-100 p-8">
+    <div className="min-h-screen bg-transparent p-4 sm:p-6 lg:p-8">
       <div className="max-w-6xl mx-auto">
-        <div className="bg-white rounded-lg shadow-xl p-8">
-          <h1 className="text-3xl font-bold text-gray-800 mb-6">🖼️➡️📄 Images to PDF</h1>
+        <div className="bg-gradient-to-br from-gray-900 to-black rounded-2xl shadow-2xl border border-green-500/20 p-6 sm:p-8">
+          <h1 className="text-3xl font-bold bg-gradient-to-r from-green-400 to-emerald-400 bg-clip-text text-transparent mb-2">🖼️➡️📄 Images to PDF</h1>
 
           {/* File Upload */}
           <div className="mb-6">
-            <label className="block mb-2 text-sm font-medium text-gray-700">
+            <label className="block mb-2 text-sm font-medium text-green-400">
               Select images to convert
             </label>
             <input
@@ -265,15 +265,15 @@ const ImagesToPdf: React.FC = () => {
               accept="image/*"
               multiple
               onChange={handleFileSelect}
-              className="block w-full text-sm text-gray-500
+              className="block w-full text-sm text-gray-400
                 file:mr-4 file:py-2 file:px-4
-                file:rounded-md file:border-0
+                file:rounded-lg file:border-0
                 file:text-sm file:font-semibold
-                file:bg-pink-50 file:text-pink-700
-                hover:file:bg-pink-100
+                file:bg-gradient-to-r file:from-green-500 file:to-emerald-600 file:text-black file:shadow-lg file:shadow-green-500/30
+                hover:file:from-green-400 hover:file:to-emerald-500
                 cursor-pointer"
             />
-            <p className="mt-2 text-sm text-gray-500">
+            <p className="mt-2 text-sm text-gray-400">
               You can select multiple images at once
             </p>
           </div>
@@ -281,19 +281,19 @@ const ImagesToPdf: React.FC = () => {
           {/* PDF Settings */}
           {imageFiles.length > 0 && (
             <>
-              <div className="mb-6 p-6 bg-gray-50 rounded-lg border border-gray-200">
-                <h3 className="text-lg font-semibold text-gray-800 mb-4">PDF Settings</h3>
+              <div className="mb-6 p-6 bg-gradient-to-r from-gray-800 to-gray-900 rounded-xl border border-green-500/20">
+                <h3 className="text-lg font-semibold text-gray-100 mb-4">PDF Settings</h3>
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                   {/* Page Size */}
                   <div>
-                    <label className="block mb-2 text-sm font-medium text-gray-700">
+                    <label className="block mb-2 text-sm font-medium text-green-400">
                       Page Size
                     </label>
                     <select
                       value={pageSize}
                       onChange={(e) => setPageSize(e.target.value as PageSize)}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg"
                     >
                       <option value="A4">A4 (210 × 297 mm)</option>
                       <option value="Letter">Letter (8.5 × 11 in)</option>
@@ -305,13 +305,13 @@ const ImagesToPdf: React.FC = () => {
 
                   {/* Image Fit */}
                   <div>
-                    <label className="block mb-2 text-sm font-medium text-gray-700">
+                    <label className="block mb-2 text-sm font-medium text-green-400">
                       Image Fit
                     </label>
                     <select
                       value={imageFit}
                       onChange={(e) => setImageFit(e.target.value as ImageFit)}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg"
                     >
                       <option value="fit">Fit (maintain ratio)</option>
                       <option value="fill">Fill (crop if needed)</option>
@@ -321,7 +321,7 @@ const ImagesToPdf: React.FC = () => {
 
                   {/* Margin */}
                   <div>
-                    <label className="block mb-2 text-sm font-medium text-gray-700">
+                    <label className="block mb-2 text-sm font-medium text-green-400">
                       Margin: {margin}px
                     </label>
                     <input
@@ -340,7 +340,7 @@ const ImagesToPdf: React.FC = () => {
               {/* Images List */}
               <div className="mb-6">
                 <div className="flex justify-between items-center mb-3">
-                  <h3 className="text-lg font-semibold text-gray-800">
+                  <h3 className="text-lg font-semibold text-gray-100">
                     Images ({imageFiles.length})
                   </h3>
                   <button
@@ -359,11 +359,11 @@ const ImagesToPdf: React.FC = () => {
                       onDragStart={() => handleDragStart(index)}
                       onDragOver={handleDragOver}
                       onDrop={(e) => handleDrop(e, index)}
-                      className={`border-2 rounded-lg overflow-hidden transition-all cursor-move ${
+                      className={`border-2 rounded-xl overflow-hidden transition-all cursor-move ${
                         draggedIndex === index ? 'opacity-50' : ''
-                      } hover:border-pink-300`}
+                      } hover:border-green-500/40`}
                     >
-                      <div className="relative p-2 bg-gray-100">
+                      <div className="relative p-2 bg-gray-800/50">
                         <img
                           src={image.dataUrl}
                           alt={image.name}
@@ -375,10 +375,10 @@ const ImagesToPdf: React.FC = () => {
                       </div>
 
                       <div className="p-3 bg-white">
-                        <p className="text-sm font-medium text-gray-700 mb-2 truncate">
+                        <p className="text-sm font-medium text-green-400 mb-2 truncate">
                           {image.name}
                         </p>
-                        <p className="text-xs text-gray-500 mb-2">
+                        <p className="text-xs text-gray-400 mb-2">
                           {image.width} × {image.height}px
                         </p>
 
@@ -409,7 +409,7 @@ const ImagesToPdf: React.FC = () => {
                   ))}
                 </div>
 
-                <p className="mt-3 text-sm text-gray-500 italic">
+                <p className="mt-3 text-sm text-gray-400 italic">
                   💡 Tip: Drag and drop to reorder images, or use ▲ ▼ buttons
                 </p>
               </div>
@@ -418,8 +418,8 @@ const ImagesToPdf: React.FC = () => {
               <button
                 onClick={convertImagesToPdf}
                 disabled={isConverting}
-                className="w-full px-6 py-3 bg-pink-600 text-white font-semibold rounded-lg
-                  hover:bg-pink-700 disabled:bg-gray-300 disabled:cursor-not-allowed
+                className="w-full px-6 py-3 bg-gradient-to-r from-green-500 to-emerald-600 text-black font-bold rounded-xl
+                  hover:from-green-400 hover:to-emerald-500 disabled:from-gray-700 disabled:to-gray-800 disabled:text-gray-500 disabled:cursor-not-allowed
                   transition-colors shadow-md hover:shadow-lg"
               >
                 {isConverting ? (
@@ -438,15 +438,15 @@ const ImagesToPdf: React.FC = () => {
           )}
 
           {/* Info Section */}
-          <div className="mt-6 p-4 bg-pink-50 rounded-lg border border-pink-200">
-            <h3 className="text-sm font-semibold text-pink-800 mb-2">📖 How to use:</h3>
-            <ol className="text-sm text-pink-700 space-y-1 list-decimal list-inside">
+          <div className="mt-6 p-4 bg-gradient-to-br from-green-500/10 to-emerald-500/10 rounded-xl border border-green-500/30">
+            <h3 className="text-sm font-semibold text-green-400 mb-2">📖 How to use:</h3>
+            <ol className="text-sm text-gray-300 space-y-1 list-decimal list-inside">
               <li>Click "Choose Files" and select multiple images</li>
               <li>Reorder images by dragging or using ▲ ▼ buttons</li>
               <li>Choose page size, image fit mode, and margin</li>
               <li>Click "Create PDF" to download your PDF</li>
             </ol>
-            <div className="mt-3 text-sm text-pink-700">
+            <div className="mt-3 text-sm text-gray-300">
               <p><strong>Image Fit Modes:</strong></p>
               <ul className="list-disc list-inside ml-4 mt-1">
                 <li><strong>Fit:</strong> Centers image and scales to fit page (recommended)</li>

@@ -169,21 +169,21 @@ const PdfPageNumbers: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-cyan-50 to-blue-100 p-8">
+    <div className="min-h-screen bg-transparent p-4 sm:p-6 lg:p-8">
       <div className="max-w-4xl mx-auto">
         <div className="bg-white rounded-2xl shadow-xl p-8">
           <div className="text-center mb-8">
-            <h1 className="text-4xl font-bold text-gray-800 mb-2">
+            <h1 className="text-4xl font-bold text-gray-100 mb-2">
               🔢 PDF Page Numbers
             </h1>
-            <p className="text-gray-600">
+            <p className="text-gray-300">
               Add customizable page numbers to your PDF
             </p>
           </div>
 
           {/* File Upload */}
           <div className="mb-8">
-            <label className="block text-sm font-semibold text-gray-700 mb-3">
+            <label className="block text-sm font-semibold text-green-400 mb-3">
               📄 Select PDF File
             </label>
             <div className="relative">
@@ -191,18 +191,18 @@ const PdfPageNumbers: React.FC = () => {
                 type="file"
                 accept=".pdf,application/pdf"
                 onChange={handleFileChange}
-                className="block w-full text-sm text-gray-500
+                className="block w-full text-sm text-gray-400
                   file:mr-4 file:py-3 file:px-6
-                  file:rounded-lg file:border-0
+                  file:rounded-xl file:border-0
                   file:text-sm file:font-semibold
-                  file:bg-cyan-50 file:text-cyan-700
-                  hover:file:bg-cyan-100 file:cursor-pointer
+                  file:bg-gradient-to-r file:from-green-500 file:to-emerald-600 file:text-black file:shadow-lg file:shadow-green-500/30
+                  hover:file:from-green-400 hover:file:to-emerald-500 file:cursor-pointer
                   cursor-pointer border-2 border-dashed border-gray-300
-                  rounded-lg p-4 hover:border-cyan-400 transition-colors"
+                  rounded-xl p-4 hover:border-cyan-400 transition-colors"
               />
             </div>
             {pdfFile && (
-              <p className="mt-3 text-sm text-gray-600 bg-cyan-50 p-3 rounded-lg">
+              <p className="mt-3 text-sm text-gray-300 bg-cyan-50 p-3 rounded-xl">
                 ✓ Selected: <span className="font-semibold">{pdfFile.name}</span>
               </p>
             )}
@@ -212,13 +212,13 @@ const PdfPageNumbers: React.FC = () => {
           <div className="grid md:grid-cols-2 gap-6 mb-8">
             {/* Position */}
             <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-3">
+              <label className="block text-sm font-semibold text-green-400 mb-3">
                 📍 Position
               </label>
               <select
                 value={position}
                 onChange={(e) => setPosition(e.target.value as Position)}
-                className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent"
+                className="w-full px-4 py-3 border-2 border-gray-300 rounded-xl focus:ring-2 focus:ring-cyan-500 focus:border-transparent"
               >
                 <option value="top-left">Top Left</option>
                 <option value="top-center">Top Center</option>
@@ -231,13 +231,13 @@ const PdfPageNumbers: React.FC = () => {
 
             {/* Format */}
             <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-3">
+              <label className="block text-sm font-semibold text-green-400 mb-3">
                 📝 Format
               </label>
               <select
                 value={format}
                 onChange={(e) => setFormat(e.target.value as Format)}
-                className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent"
+                className="w-full px-4 py-3 border-2 border-gray-300 rounded-xl focus:ring-2 focus:ring-cyan-500 focus:border-transparent"
               >
                 <option value="number">Number Only (1, 2, 3...)</option>
                 <option value="page-of-total">Page X of Y</option>
@@ -247,7 +247,7 @@ const PdfPageNumbers: React.FC = () => {
 
             {/* Font Size */}
             <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-3">
+              <label className="block text-sm font-semibold text-green-400 mb-3">
                 🔤 Font Size: {fontSize}px
               </label>
               <input
@@ -256,9 +256,9 @@ const PdfPageNumbers: React.FC = () => {
                 max="24"
                 value={fontSize}
                 onChange={(e) => setFontSize(Number(e.target.value))}
-                className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-cyan-600"
+                className="w-full h-2 bg-gray-200 rounded-xl appearance-none cursor-pointer accent-cyan-600"
               />
-              <div className="flex justify-between text-xs text-gray-500 mt-1">
+              <div className="flex justify-between text-xs text-gray-400 mt-1">
                 <span>8px</span>
                 <span>16px</span>
                 <span>24px</span>
@@ -267,7 +267,7 @@ const PdfPageNumbers: React.FC = () => {
 
             {/* Text Color */}
             <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-3">
+              <label className="block text-sm font-semibold text-green-400 mb-3">
                 🎨 Text Color
               </label>
               <div className="flex gap-3">
@@ -275,21 +275,21 @@ const PdfPageNumbers: React.FC = () => {
                   type="color"
                   value={textColor}
                   onChange={(e) => setTextColor(e.target.value)}
-                  className="w-16 h-12 border-2 border-gray-300 rounded-lg cursor-pointer"
+                  className="w-16 h-12 border-2 border-gray-300 rounded-xl cursor-pointer"
                 />
                 <input
                   type="text"
                   value={textColor}
                   onChange={(e) => setTextColor(e.target.value)}
                   placeholder="#000000"
-                  className="flex-1 px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent"
+                  className="flex-1 px-4 py-3 border-2 border-gray-300 rounded-xl focus:ring-2 focus:ring-cyan-500 focus:border-transparent"
                 />
               </div>
             </div>
 
             {/* Margin X */}
             <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-3">
+              <label className="block text-sm font-semibold text-green-400 mb-3">
                 ↔️ Horizontal Margin: {marginX}px
               </label>
               <input
@@ -298,9 +298,9 @@ const PdfPageNumbers: React.FC = () => {
                 max="100"
                 value={marginX}
                 onChange={(e) => setMarginX(Number(e.target.value))}
-                className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-cyan-600"
+                className="w-full h-2 bg-gray-200 rounded-xl appearance-none cursor-pointer accent-cyan-600"
               />
-              <div className="flex justify-between text-xs text-gray-500 mt-1">
+              <div className="flex justify-between text-xs text-gray-400 mt-1">
                 <span>10px</span>
                 <span>55px</span>
                 <span>100px</span>
@@ -309,7 +309,7 @@ const PdfPageNumbers: React.FC = () => {
 
             {/* Margin Y */}
             <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-3">
+              <label className="block text-sm font-semibold text-green-400 mb-3">
                 ↕️ Vertical Margin: {marginY}px
               </label>
               <input
@@ -318,9 +318,9 @@ const PdfPageNumbers: React.FC = () => {
                 max="100"
                 value={marginY}
                 onChange={(e) => setMarginY(Number(e.target.value))}
-                className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-cyan-600"
+                className="w-full h-2 bg-gray-200 rounded-xl appearance-none cursor-pointer accent-cyan-600"
               />
-              <div className="flex justify-between text-xs text-gray-500 mt-1">
+              <div className="flex justify-between text-xs text-gray-400 mt-1">
                 <span>10px</span>
                 <span>55px</span>
                 <span>100px</span>
@@ -329,7 +329,7 @@ const PdfPageNumbers: React.FC = () => {
 
             {/* Start Number */}
             <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-3">
+              <label className="block text-sm font-semibold text-green-400 mb-3">
                 🔢 Start Number
               </label>
               <input
@@ -337,13 +337,13 @@ const PdfPageNumbers: React.FC = () => {
                 min="1"
                 value={startNumber}
                 onChange={(e) => setStartNumber(Number(e.target.value))}
-                className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent"
+                className="w-full px-4 py-3 border-2 border-gray-300 rounded-xl focus:ring-2 focus:ring-cyan-500 focus:border-transparent"
               />
             </div>
 
             {/* Prefix */}
             <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-3">
+              <label className="block text-sm font-semibold text-green-400 mb-3">
                 📌 Prefix (Optional)
               </label>
               <input
@@ -351,13 +351,13 @@ const PdfPageNumbers: React.FC = () => {
                 value={prefix}
                 onChange={(e) => setPrefix(e.target.value)}
                 placeholder="e.g., Page"
-                className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent"
+                className="w-full px-4 py-3 border-2 border-gray-300 rounded-xl focus:ring-2 focus:ring-cyan-500 focus:border-transparent"
               />
             </div>
 
             {/* Suffix */}
             <div className="md:col-span-2">
-              <label className="block text-sm font-semibold text-gray-700 mb-3">
+              <label className="block text-sm font-semibold text-green-400 mb-3">
                 📌 Suffix (Optional)
               </label>
               <input
@@ -365,14 +365,14 @@ const PdfPageNumbers: React.FC = () => {
                 value={suffix}
                 onChange={(e) => setSuffix(e.target.value)}
                 placeholder="e.g., - Confidential"
-                className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-transparent"
+                className="w-full px-4 py-3 border-2 border-gray-300 rounded-xl focus:ring-2 focus:ring-cyan-500 focus:border-transparent"
               />
             </div>
           </div>
 
           {/* Skip Options */}
-          <div className="mb-8 bg-gray-50 rounded-xl p-6">
-            <h3 className="text-sm font-semibold text-gray-700 mb-4">
+          <div className="mb-8 bg-gradient-to-r from-gray-800 to-gray-900 rounded-xl p-6">
+            <h3 className="text-sm font-semibold text-green-400 mb-4">
               ⚙️ Skip Pages Options
             </h3>
             <div className="flex flex-wrap gap-6">
@@ -383,7 +383,7 @@ const PdfPageNumbers: React.FC = () => {
                   onChange={(e) => setSkipFirstPage(e.target.checked)}
                   className="w-5 h-5 text-cyan-600 border-gray-300 rounded focus:ring-cyan-500 cursor-pointer"
                 />
-                <span className="text-gray-700">Skip first page (cover page)</span>
+                <span className="text-green-400">Skip first page (cover page)</span>
               </label>
               <label className="flex items-center gap-3 cursor-pointer">
                 <input
@@ -392,18 +392,18 @@ const PdfPageNumbers: React.FC = () => {
                   onChange={(e) => setSkipLastPage(e.target.checked)}
                   className="w-5 h-5 text-cyan-600 border-gray-300 rounded focus:ring-cyan-500 cursor-pointer"
                 />
-                <span className="text-gray-700">Skip last page (back cover)</span>
+                <span className="text-green-400">Skip last page (back cover)</span>
               </label>
             </div>
           </div>
 
           {/* Preview Example */}
           <div className="mb-8 bg-gradient-to-r from-cyan-50 to-blue-50 rounded-xl p-6 border-2 border-cyan-200">
-            <h3 className="text-sm font-semibold text-gray-700 mb-3">
+            <h3 className="text-sm font-semibold text-green-400 mb-3">
               👁️ Preview Example
             </h3>
-            <div className="bg-white rounded-lg p-4 text-center">
-              <p className="text-gray-600 text-sm mb-2">Page 1 will display as:</p>
+            <div className="bg-white rounded-xl p-4 text-center">
+              <p className="text-gray-300 text-sm mb-2">Page 1 will display as:</p>
               <p
                 className="font-semibold"
                 style={{
@@ -422,7 +422,7 @@ const PdfPageNumbers: React.FC = () => {
             disabled={!pdfFile || loading}
             className={`w-full py-4 px-6 rounded-xl font-bold text-lg shadow-lg transition-all ${
               !pdfFile || loading
-                ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                ? 'bg-gray-300 text-gray-400 cursor-not-allowed'
                 : 'bg-gradient-to-r from-cyan-500 to-blue-600 text-white hover:from-cyan-600 hover:to-blue-700 transform hover:scale-[1.02]'
             }`}
           >
@@ -456,7 +456,7 @@ const PdfPageNumbers: React.FC = () => {
             <h3 className="font-semibold text-blue-900 mb-3 flex items-center gap-2">
               <span>💡</span> Tips for Best Results
             </h3>
-            <ul className="space-y-2 text-sm text-blue-800">
+            <ul className="space-y-2 text-sm text-green-400">
               <li className="flex items-start gap-2">
                 <span className="text-blue-500 mt-1">•</span>
                 <span><strong>Position:</strong> Bottom center is the most common position for page numbers</span>

@@ -117,30 +117,30 @@ const PdfCompressor: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-50 to-teal-100 p-8">
+    <div className="min-h-screen bg-transparent p-4 sm:p-6 lg:p-8">
       <div className="max-w-4xl mx-auto">
-        <div className="bg-white rounded-lg shadow-xl p-8">
-          <h1 className="text-3xl font-bold text-gray-800 mb-6">🗜️ PDF Compressor</h1>
+        <div className="bg-gradient-to-br from-gray-900 to-black rounded-2xl shadow-2xl border border-green-500/20 p-6 sm:p-8">
+          <h1 className="text-3xl font-bold bg-gradient-to-r from-green-400 to-emerald-400 bg-clip-text text-transparent mb-2">🗜️ PDF Compressor</h1>
 
           {/* File Upload Section */}
           <div className="mb-6">
-            <label className="block mb-2 text-sm font-medium text-gray-700">
+            <label className="block mb-2 text-sm font-medium text-green-400">
               Select PDF file to compress
             </label>
             <input
               type="file"
               accept="application/pdf"
               onChange={handleFileSelect}
-              className="block w-full text-sm text-gray-500
+              className="block w-full text-sm text-gray-400
                 file:mr-4 file:py-2 file:px-4
-                file:rounded-md file:border-0
+                file:rounded-lg file:border-0
                 file:text-sm file:font-semibold
-                file:bg-green-50 file:text-green-700
-                hover:file:bg-green-100
+                file:bg-gradient-to-r file:from-green-500 file:to-emerald-600 file:text-black file:shadow-lg file:shadow-green-500/30
+                hover:file:from-green-400 hover:file:to-emerald-500
                 cursor-pointer"
             />
             {pdfFile && (
-              <div className="mt-3 p-3 bg-green-50 rounded-lg border border-green-200">
+              <div className="mt-3 p-3 bg-gradient-to-br from-green-500/10 to-emerald-500/10 rounded-xl border border-green-500/30">
                 <p className="text-sm text-green-800">
                   📄 <strong>{pdfFile.name}</strong>
                 </p>
@@ -155,70 +155,70 @@ const PdfCompressor: React.FC = () => {
           {pdfFile && (
             <>
               <div className="mb-6">
-                <label className="block mb-3 text-sm font-medium text-gray-700">
+                <label className="block mb-3 text-sm font-medium text-green-400">
                   Select Compression Level
                 </label>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
                   <button
                     onClick={() => setCompressionLevel('basic')}
-                    className={`p-4 rounded-lg border-2 text-left transition-all ${
+                    className={`p-4 rounded-xl border-2 text-left transition-all ${
                       compressionLevel === 'basic'
                         ? 'border-green-500 bg-green-50'
-                        : 'border-gray-200 hover:border-green-300'
+                        : 'border-green-500/20 hover:border-green-500/40'
                     }`}
                   >
-                    <div className="font-semibold text-gray-800">🟢 Basic</div>
-                    <div className="text-sm text-gray-600 mt-1">Light compression</div>
-                    <div className="text-xs text-gray-500 mt-1">~5-15% reduction</div>
+                    <div className="font-semibold text-gray-100">🟢 Basic</div>
+                    <div className="text-sm text-gray-300 mt-1">Light compression</div>
+                    <div className="text-xs text-gray-400 mt-1">~5-15% reduction</div>
                   </button>
 
                   <button
                     onClick={() => setCompressionLevel('medium')}
-                    className={`p-4 rounded-lg border-2 text-left transition-all ${
+                    className={`p-4 rounded-xl border-2 text-left transition-all ${
                       compressionLevel === 'medium'
                         ? 'border-green-500 bg-green-50'
-                        : 'border-gray-200 hover:border-green-300'
+                        : 'border-green-500/20 hover:border-green-500/40'
                     }`}
                   >
-                    <div className="font-semibold text-gray-800">🟡 Medium</div>
-                    <div className="text-sm text-gray-600 mt-1">Balanced compression</div>
-                    <div className="text-xs text-gray-500 mt-1">~15-30% reduction</div>
+                    <div className="font-semibold text-gray-100">🟡 Medium</div>
+                    <div className="text-sm text-gray-300 mt-1">Balanced compression</div>
+                    <div className="text-xs text-gray-400 mt-1">~15-30% reduction</div>
                   </button>
 
                   <button
                     onClick={() => setCompressionLevel('high')}
-                    className={`p-4 rounded-lg border-2 text-left transition-all ${
+                    className={`p-4 rounded-xl border-2 text-left transition-all ${
                       compressionLevel === 'high'
                         ? 'border-green-500 bg-green-50'
-                        : 'border-gray-200 hover:border-green-300'
+                        : 'border-green-500/20 hover:border-green-500/40'
                     }`}
                   >
-                    <div className="font-semibold text-gray-800">🔴 High</div>
-                    <div className="text-sm text-gray-600 mt-1">Maximum compression</div>
-                    <div className="text-xs text-gray-500 mt-1">~30-50% reduction</div>
+                    <div className="font-semibold text-gray-100">🔴 High</div>
+                    <div className="text-sm text-gray-300 mt-1">Maximum compression</div>
+                    <div className="text-xs text-gray-400 mt-1">~30-50% reduction</div>
                   </button>
                 </div>
               </div>
 
               {/* Compression Stats */}
               {compressionStats && (
-                <div className="mb-6 p-6 bg-gradient-to-r from-green-50 to-teal-50 rounded-lg border-2 border-green-200">
-                  <h3 className="text-lg font-semibold text-gray-800 mb-3">📊 Compression Results</h3>
+                <div className="mb-6 p-6 bg-gradient-to-r from-green-50 to-teal-50 rounded-xl border-2 border-green-200">
+                  <h3 className="text-lg font-semibold text-gray-100 mb-3">📊 Compression Results</h3>
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                     <div>
-                      <p className="text-sm text-gray-600">Original Size</p>
-                      <p className="text-2xl font-bold text-gray-800">
+                      <p className="text-sm text-gray-300">Original Size</p>
+                      <p className="text-2xl font-bold bg-gradient-to-r from-green-400 to-emerald-400 bg-clip-text text-transparent">
                         {formatFileSize(compressionStats.originalSize)}
                       </p>
                     </div>
                     <div>
-                      <p className="text-sm text-gray-600">Compressed Size</p>
+                      <p className="text-sm text-gray-300">Compressed Size</p>
                       <p className="text-2xl font-bold text-green-600">
                         {formatFileSize(compressionStats.compressedSize)}
                       </p>
                     </div>
                     <div>
-                      <p className="text-sm text-gray-600">Reduction</p>
+                      <p className="text-sm text-gray-300">Reduction</p>
                       <p className="text-2xl font-bold text-teal-600">
                         {compressionStats.reductionPercentage.toFixed(2)}%
                       </p>
@@ -239,8 +239,8 @@ const PdfCompressor: React.FC = () => {
               <button
                 onClick={compressPdf}
                 disabled={isCompressing}
-                className="w-full px-6 py-3 bg-green-600 text-white font-semibold rounded-lg
-                  hover:bg-green-700 disabled:bg-gray-300 disabled:cursor-not-allowed
+                className="w-full px-6 py-3 bg-gradient-to-r from-green-500 to-emerald-600 text-black font-bold rounded-xl
+                  hover:from-green-400 hover:to-emerald-500 disabled:from-gray-700 disabled:to-gray-800 disabled:text-gray-500 disabled:cursor-not-allowed
                   transition-colors shadow-md hover:shadow-lg"
               >
                 {isCompressing ? (
@@ -259,7 +259,7 @@ const PdfCompressor: React.FC = () => {
           )}
 
           {/* Info Section */}
-          <div className="mt-6 p-4 bg-green-50 rounded-lg border border-green-200">
+          <div className="mt-6 p-4 bg-gradient-to-br from-green-500/10 to-emerald-500/10 rounded-xl border border-green-500/30">
             <h3 className="text-sm font-semibold text-green-800 mb-2">💡 How it works:</h3>
             <ul className="text-sm text-green-700 space-y-1 list-disc list-inside">
               <li><strong>Basic:</strong> Removes redundant data and optimizes structure</li>
@@ -272,9 +272,9 @@ const PdfCompressor: React.FC = () => {
           </div>
 
           {/* Additional Info */}
-          <div className="mt-4 p-4 bg-blue-50 rounded-lg border border-blue-200">
-            <h3 className="text-sm font-semibold text-blue-800 mb-2">📖 Tips for best results:</h3>
-            <ol className="text-sm text-blue-700 space-y-1 list-decimal list-inside">
+          <div className="mt-4 p-4 bg-gradient-to-br from-green-500/10 to-emerald-500/10 rounded-xl border border-green-500/30">
+            <h3 className="text-sm font-semibold text-green-400 mb-2">📖 Tips for best results:</h3>
+            <ol className="text-sm text-gray-300 space-y-1 list-decimal list-inside">
               <li>Start with "Medium" compression for balanced results</li>
               <li>Use "High" for maximum file size reduction</li>
               <li>PDFs with lots of text compress better than image-heavy PDFs</li>

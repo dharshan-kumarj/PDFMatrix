@@ -403,38 +403,38 @@ const PdfWatermark: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-teal-50 to-cyan-100 p-8">
+    <div className="min-h-screen bg-transparent p-4 sm:p-6 lg:p-8">
       <div className="max-w-4xl mx-auto">
         <div className="bg-white rounded-2xl shadow-xl p-8">
           <div className="text-center mb-8">
-            <h1 className="text-4xl font-bold text-gray-800 mb-2">
+            <h1 className="text-4xl font-bold text-gray-100 mb-2">
               💧 PDF Watermark
             </h1>
-            <p className="text-gray-600">
+            <p className="text-gray-300">
               Add text or image watermarks to protect your PDFs
             </p>
           </div>
 
           {/* PDF File Upload */}
           <div className="mb-8">
-            <label className="block text-sm font-semibold text-gray-700 mb-3">
+            <label className="block text-sm font-semibold text-green-400 mb-3">
               📄 Select PDF File
             </label>
             <input
               type="file"
               accept=".pdf,application/pdf"
               onChange={handlePdfChange}
-              className="block w-full text-sm text-gray-500
+              className="block w-full text-sm text-gray-400
                 file:mr-4 file:py-3 file:px-6
-                file:rounded-lg file:border-0
+                file:rounded-xl file:border-0
                 file:text-sm file:font-semibold
-                file:bg-teal-50 file:text-teal-700
-                hover:file:bg-teal-100 file:cursor-pointer
+                file:bg-gradient-to-r file:from-green-500 file:to-emerald-600 file:text-black file:shadow-lg file:shadow-green-500/30
+                hover:file:from-green-400 hover:file:to-emerald-500 file:cursor-pointer
                 cursor-pointer border-2 border-dashed border-gray-300
-                rounded-lg p-4 hover:border-teal-400 transition-colors"
+                rounded-xl p-4 hover:border-teal-400 transition-colors"
             />
             {pdfFile && (
-              <p className="mt-3 text-sm text-gray-600 bg-teal-50 p-3 rounded-lg">
+              <p className="mt-3 text-sm text-gray-300 bg-teal-50 p-3 rounded-xl">
                 ✓ Selected: <span className="font-semibold">{pdfFile.name}</span>
               </p>
             )}
@@ -442,7 +442,7 @@ const PdfWatermark: React.FC = () => {
 
           {/* Watermark Type Selection */}
           <div className="mb-8">
-            <label className="block text-sm font-semibold text-gray-700 mb-3">
+            <label className="block text-sm font-semibold text-green-400 mb-3">
               🎨 Watermark Type
             </label>
             <div className="flex gap-4">
@@ -451,7 +451,7 @@ const PdfWatermark: React.FC = () => {
                 className={`flex-1 py-4 px-6 rounded-xl font-semibold transition-all ${
                   watermarkType === 'text'
                     ? 'bg-gradient-to-r from-teal-500 to-cyan-600 text-white shadow-lg'
-                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                    : 'bg-gray-800/50 text-green-400 hover:bg-gray-200'
                 }`}
               >
                 📝 Text Watermark
@@ -461,7 +461,7 @@ const PdfWatermark: React.FC = () => {
                 className={`flex-1 py-4 px-6 rounded-xl font-semibold transition-all ${
                   watermarkType === 'image'
                     ? 'bg-gradient-to-r from-teal-500 to-cyan-600 text-white shadow-lg'
-                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                    : 'bg-gray-800/50 text-green-400 hover:bg-gray-200'
                 }`}
               >
                 🖼️ Image Watermark
@@ -473,13 +473,13 @@ const PdfWatermark: React.FC = () => {
           {watermarkType === 'text' && (
             <div className="space-y-6 mb-8">
               <div className="bg-gradient-to-r from-teal-50 to-cyan-50 rounded-xl p-6 border-2 border-teal-200">
-                <h3 className="text-lg font-semibold text-gray-800 mb-4">
+                <h3 className="text-lg font-semibold text-gray-100 mb-4">
                   📝 Text Watermark Settings
                 </h3>
 
                 {/* Watermark Text */}
                 <div className="mb-6">
-                  <label className="block text-sm font-semibold text-gray-700 mb-3">
+                  <label className="block text-sm font-semibold text-green-400 mb-3">
                     Watermark Text
                   </label>
                   <input
@@ -487,14 +487,14 @@ const PdfWatermark: React.FC = () => {
                     value={watermarkText}
                     onChange={(e) => setWatermarkText(e.target.value)}
                     placeholder="Enter watermark text"
-                    className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+                    className="w-full px-4 py-3 border-2 border-gray-300 rounded-xl focus:ring-2 focus:ring-teal-500 focus:border-transparent"
                   />
                 </div>
 
                 <div className="grid md:grid-cols-2 gap-6">
                   {/* Font Size */}
                   <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-3">
+                    <label className="block text-sm font-semibold text-green-400 mb-3">
                       Font Size: {fontSize}px
                     </label>
                     <input
@@ -503,9 +503,9 @@ const PdfWatermark: React.FC = () => {
                       max="120"
                       value={fontSize}
                       onChange={(e) => setFontSize(Number(e.target.value))}
-                      className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-teal-600"
+                      className="w-full h-2 bg-gray-200 rounded-xl appearance-none cursor-pointer accent-teal-600"
                     />
-                    <div className="flex justify-between text-xs text-gray-500 mt-1">
+                    <div className="flex justify-between text-xs text-gray-400 mt-1">
                       <span>20px</span>
                       <span>70px</span>
                       <span>120px</span>
@@ -514,7 +514,7 @@ const PdfWatermark: React.FC = () => {
 
                   {/* Opacity */}
                   <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-3">
+                    <label className="block text-sm font-semibold text-green-400 mb-3">
                       Opacity: {Math.round(opacity * 100)}%
                     </label>
                     <input
@@ -524,9 +524,9 @@ const PdfWatermark: React.FC = () => {
                       step="0.1"
                       value={opacity}
                       onChange={(e) => setOpacity(Number(e.target.value))}
-                      className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-teal-600"
+                      className="w-full h-2 bg-gray-200 rounded-xl appearance-none cursor-pointer accent-teal-600"
                     />
-                    <div className="flex justify-between text-xs text-gray-500 mt-1">
+                    <div className="flex justify-between text-xs text-gray-400 mt-1">
                       <span>10%</span>
                       <span>55%</span>
                       <span>100%</span>
@@ -535,7 +535,7 @@ const PdfWatermark: React.FC = () => {
 
                   {/* Text Color */}
                   <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-3">
+                    <label className="block text-sm font-semibold text-green-400 mb-3">
                       Text Color
                     </label>
                     <div className="flex gap-3">
@@ -543,20 +543,20 @@ const PdfWatermark: React.FC = () => {
                         type="color"
                         value={textColor}
                         onChange={(e) => setTextColor(e.target.value)}
-                        className="w-16 h-12 border-2 border-gray-300 rounded-lg cursor-pointer"
+                        className="w-16 h-12 border-2 border-gray-300 rounded-xl cursor-pointer"
                       />
                       <input
                         type="text"
                         value={textColor}
                         onChange={(e) => setTextColor(e.target.value)}
-                        className="flex-1 px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+                        className="flex-1 px-4 py-3 border-2 border-gray-300 rounded-xl focus:ring-2 focus:ring-teal-500 focus:border-transparent"
                       />
                     </div>
                   </div>
 
                   {/* Rotation */}
                   <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-3">
+                    <label className="block text-sm font-semibold text-green-400 mb-3">
                       Rotation: {rotation}°
                     </label>
                     <input
@@ -565,9 +565,9 @@ const PdfWatermark: React.FC = () => {
                       max="360"
                       value={rotation}
                       onChange={(e) => setRotation(Number(e.target.value))}
-                      className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-teal-600"
+                      className="w-full h-2 bg-gray-200 rounded-xl appearance-none cursor-pointer accent-teal-600"
                     />
-                    <div className="flex justify-between text-xs text-gray-500 mt-1">
+                    <div className="flex justify-between text-xs text-gray-400 mt-1">
                       <span>0°</span>
                       <span>180°</span>
                       <span>360°</span>
@@ -576,13 +576,13 @@ const PdfWatermark: React.FC = () => {
 
                   {/* Position */}
                   <div className="md:col-span-2">
-                    <label className="block text-sm font-semibold text-gray-700 mb-3">
+                    <label className="block text-sm font-semibold text-green-400 mb-3">
                       Position
                     </label>
                     <select
                       value={position}
                       onChange={(e) => setPosition(e.target.value as Position)}
-                      className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+                      className="w-full px-4 py-3 border-2 border-gray-300 rounded-xl focus:ring-2 focus:ring-teal-500 focus:border-transparent"
                     >
                       <option value="center">Center</option>
                       <option value="diagonal">Diagonal (Center at 45°)</option>
@@ -596,8 +596,8 @@ const PdfWatermark: React.FC = () => {
                 </div>
 
                 {/* Preview */}
-                <div className="mt-6 bg-white rounded-lg p-6 border-2 border-gray-200">
-                  <p className="text-sm text-gray-600 mb-3 text-center">Preview:</p>
+                <div className="mt-6 bg-white rounded-xl p-6 border-2 border-green-500/20">
+                  <p className="text-sm text-gray-300 mb-3 text-center">Preview:</p>
                   <div className="flex justify-center">
                     <p
                       style={{
@@ -620,30 +620,30 @@ const PdfWatermark: React.FC = () => {
           {watermarkType === 'image' && (
             <div className="space-y-6 mb-8">
               <div className="bg-gradient-to-r from-teal-50 to-cyan-50 rounded-xl p-6 border-2 border-teal-200">
-                <h3 className="text-lg font-semibold text-gray-800 mb-4">
+                <h3 className="text-lg font-semibold text-gray-100 mb-4">
                   🖼️ Image Watermark Settings
                 </h3>
 
                 {/* Image Upload */}
                 <div className="mb-6">
-                  <label className="block text-sm font-semibold text-gray-700 mb-3">
+                  <label className="block text-sm font-semibold text-green-400 mb-3">
                     Watermark Image (PNG or JPEG)
                   </label>
                   <input
                     type="file"
                     accept="image/png,image/jpeg,image/jpg"
                     onChange={handleImageChange}
-                    className="block w-full text-sm text-gray-500
+                    className="block w-full text-sm text-gray-400
                       file:mr-4 file:py-3 file:px-6
-                      file:rounded-lg file:border-0
+                      file:rounded-xl file:border-0
                       file:text-sm file:font-semibold
-                      file:bg-teal-50 file:text-teal-700
-                      hover:file:bg-teal-100 file:cursor-pointer
+                      file:bg-gradient-to-r file:from-green-500 file:to-emerald-600 file:text-black file:shadow-lg file:shadow-green-500/30
+                      hover:file:from-green-400 hover:file:to-emerald-500 file:cursor-pointer
                       cursor-pointer border-2 border-dashed border-gray-300
-                      rounded-lg p-4 hover:border-teal-400 transition-colors"
+                      rounded-xl p-4 hover:border-teal-400 transition-colors"
                   />
                   {watermarkImage && (
-                    <p className="mt-3 text-sm text-gray-600 bg-teal-50 p-3 rounded-lg">
+                    <p className="mt-3 text-sm text-gray-300 bg-teal-50 p-3 rounded-xl">
                       ✓ Selected: <span className="font-semibold">{watermarkImage.name}</span>
                     </p>
                   )}
@@ -652,7 +652,7 @@ const PdfWatermark: React.FC = () => {
                 <div className="grid md:grid-cols-2 gap-6">
                   {/* Image Opacity */}
                   <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-3">
+                    <label className="block text-sm font-semibold text-green-400 mb-3">
                       Opacity: {Math.round(imageOpacity * 100)}%
                     </label>
                     <input
@@ -662,9 +662,9 @@ const PdfWatermark: React.FC = () => {
                       step="0.1"
                       value={imageOpacity}
                       onChange={(e) => setImageOpacity(Number(e.target.value))}
-                      className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-teal-600"
+                      className="w-full h-2 bg-gray-200 rounded-xl appearance-none cursor-pointer accent-teal-600"
                     />
-                    <div className="flex justify-between text-xs text-gray-500 mt-1">
+                    <div className="flex justify-between text-xs text-gray-400 mt-1">
                       <span>10%</span>
                       <span>55%</span>
                       <span>100%</span>
@@ -673,7 +673,7 @@ const PdfWatermark: React.FC = () => {
 
                   {/* Image Scale */}
                   <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-3">
+                    <label className="block text-sm font-semibold text-green-400 mb-3">
                       Size: {Math.round(imageScale * 100)}%
                     </label>
                     <input
@@ -683,9 +683,9 @@ const PdfWatermark: React.FC = () => {
                       step="0.05"
                       value={imageScale}
                       onChange={(e) => setImageScale(Number(e.target.value))}
-                      className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-teal-600"
+                      className="w-full h-2 bg-gray-200 rounded-xl appearance-none cursor-pointer accent-teal-600"
                     />
-                    <div className="flex justify-between text-xs text-gray-500 mt-1">
+                    <div className="flex justify-between text-xs text-gray-400 mt-1">
                       <span>10%</span>
                       <span>55%</span>
                       <span>100%</span>
@@ -694,13 +694,13 @@ const PdfWatermark: React.FC = () => {
 
                   {/* Image Position */}
                   <div className="md:col-span-2">
-                    <label className="block text-sm font-semibold text-gray-700 mb-3">
+                    <label className="block text-sm font-semibold text-green-400 mb-3">
                       Position
                     </label>
                     <select
                       value={imagePosition}
                       onChange={(e) => setImagePosition(e.target.value as Position)}
-                      className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+                      className="w-full px-4 py-3 border-2 border-gray-300 rounded-xl focus:ring-2 focus:ring-teal-500 focus:border-transparent"
                     >
                       <option value="center">Center</option>
                       <option value="top-left">Top Left</option>
@@ -716,8 +716,8 @@ const PdfWatermark: React.FC = () => {
           )}
 
           {/* Page Selection */}
-          <div className="mb-8 bg-gray-50 rounded-xl p-6">
-            <h3 className="text-sm font-semibold text-gray-700 mb-4">
+          <div className="mb-8 bg-gradient-to-r from-gray-800 to-gray-900 rounded-xl p-6">
+            <h3 className="text-sm font-semibold text-green-400 mb-4">
               📄 Apply To Pages
             </h3>
             <div className="space-y-4">
@@ -728,7 +728,7 @@ const PdfWatermark: React.FC = () => {
                   onChange={() => setApplyToAllPages(true)}
                   className="w-5 h-5 text-teal-600 border-gray-300 focus:ring-teal-500 cursor-pointer"
                 />
-                <span className="text-gray-700">Apply to all pages</span>
+                <span className="text-green-400">Apply to all pages</span>
               </label>
               <label className="flex items-center gap-3 cursor-pointer">
                 <input
@@ -737,7 +737,7 @@ const PdfWatermark: React.FC = () => {
                   onChange={() => setApplyToAllPages(false)}
                   className="w-5 h-5 text-teal-600 border-gray-300 focus:ring-teal-500 cursor-pointer"
                 />
-                <span className="text-gray-700">Apply to specific pages</span>
+                <span className="text-green-400">Apply to specific pages</span>
               </label>
               {!applyToAllPages && (
                 <input
@@ -745,7 +745,7 @@ const PdfWatermark: React.FC = () => {
                   value={specificPages}
                   onChange={(e) => setSpecificPages(e.target.value)}
                   placeholder="e.g., 1,3,5-7,10"
-                  className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+                  className="w-full px-4 py-3 border-2 border-gray-300 rounded-xl focus:ring-2 focus:ring-teal-500 focus:border-transparent"
                 />
               )}
             </div>
@@ -757,7 +757,7 @@ const PdfWatermark: React.FC = () => {
             disabled={!pdfFile || loading || (watermarkType === 'image' && !watermarkImage)}
             className={`w-full py-4 px-6 rounded-xl font-bold text-lg shadow-lg transition-all ${
               !pdfFile || loading || (watermarkType === 'image' && !watermarkImage)
-                ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                ? 'bg-gray-300 text-gray-400 cursor-not-allowed'
                 : 'bg-gradient-to-r from-teal-500 to-cyan-600 text-white hover:from-teal-600 hover:to-cyan-700 transform hover:scale-[1.02]'
             }`}
           >
@@ -791,7 +791,7 @@ const PdfWatermark: React.FC = () => {
             <h3 className="font-semibold text-blue-900 mb-3 flex items-center gap-2">
               <span>💡</span> Watermark Tips
             </h3>
-            <ul className="space-y-2 text-sm text-blue-800">
+            <ul className="space-y-2 text-sm text-green-400">
               <li className="flex items-start gap-2">
                 <span className="text-blue-500 mt-1">•</span>
                 <span><strong>Text Watermarks:</strong> Perfect for "CONFIDENTIAL", "DRAFT", or copyright notices</span>

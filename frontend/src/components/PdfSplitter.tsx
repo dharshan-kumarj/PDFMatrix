@@ -326,7 +326,7 @@ const PdfSplitter: React.FC = () => {
                     className={`p-4 rounded-lg border-2 text-left transition-all ${
                       splitMode === 'byRange'
                         ? 'border-green-500 bg-green-500/20'
-                        : 'border-gray-200 hover:border-green-400'
+                        : 'border-green-500/30 hover:border-green-500/50 bg-gray-800/50'
                     }`}
                   >
                     <div className="font-semibold text-white">📑 Split by Ranges</div>
@@ -338,7 +338,7 @@ const PdfSplitter: React.FC = () => {
                     className={`p-4 rounded-lg border-2 text-left transition-all ${
                       splitMode === 'byPages'
                         ? 'border-green-500 bg-green-500/20'
-                        : 'border-gray-200 hover:border-green-400'
+                        : 'border-green-500/30 hover:border-green-500/50 bg-gray-800/50'
                     }`}
                   >
                     <div className="font-semibold text-white">📄 Split into Individual Pages</div>
@@ -350,7 +350,7 @@ const PdfSplitter: React.FC = () => {
                     className={`p-4 rounded-lg border-2 text-left transition-all ${
                       splitMode === 'extractPages'
                         ? 'border-green-500 bg-green-500/20'
-                        : 'border-gray-200 hover:border-green-400'
+                        : 'border-green-500/30 hover:border-green-500/50 bg-gray-800/50'
                     }`}
                   >
                     <div className="font-semibold text-white">✂️ Extract Specific Pages</div>
@@ -360,21 +360,21 @@ const PdfSplitter: React.FC = () => {
               </div>
 
               {/* Split Mode Content */}
-              <div className="mb-6 p-6 bg-gray-50 rounded-lg border border-gray-200">
+              <div className="mb-6 p-6 bg-gradient-to-br from-gray-800/50 to-black/50 rounded-lg border border-green-500/30">
                 {splitMode === 'byRange' && (
                   <div>
                     <div className="flex justify-between items-center mb-4">
-                      <h3 className="text-lg font-semibold text-white">Custom Page Ranges</h3>
+                      <h3 className="text-lg font-semibold text-green-400">Custom Page Ranges</h3>
                       <button
                         onClick={addSplitRange}
-                        className="px-4 py-2 bg-gradient-to-r from-green-500 to-emerald-600 text-black font-bold rounded-md hover:from-green-400 hover:to-emerald-500 text-sm font-medium"
+                        className="px-4 py-2 bg-gradient-to-r from-green-500 to-emerald-600 text-black font-bold rounded-md hover:from-green-400 hover:to-emerald-500 text-sm shadow-lg shadow-green-500/30"
                       >
                         + Add Range
                       </button>
                     </div>
 
                     {splitRanges.length === 0 ? (
-                      <p className="text-sm text-gray-500 text-center py-8">
+                      <p className="text-sm text-gray-400 text-center py-8">
                         Click "Add Range" to create your first split range
                       </p>
                     ) : (
@@ -382,9 +382,9 @@ const PdfSplitter: React.FC = () => {
                         {splitRanges.map((range, index) => (
                           <div
                             key={range.id}
-                            className="flex items-center gap-3 p-4 bg-white rounded-lg border border-gray-200"
+                            className="flex items-center gap-3 p-4 bg-gray-900/50 rounded-lg border border-green-500/30"
                           >
-                            <span className="text-sm font-semibold text-gray-500 w-6">
+                            <span className="text-sm font-semibold text-green-400 w-6">
                               {index + 1}.
                             </span>
                             <input
@@ -392,17 +392,17 @@ const PdfSplitter: React.FC = () => {
                               value={range.name}
                               onChange={(e) => updateSplitRange(range.id, 'name', e.target.value)}
                               placeholder="File name"
-                              className="flex-1 px-3 py-2 border border-gray-300 rounded-md text-sm"
+                              className="flex-1 px-3 py-2 bg-gray-800/50 border border-green-500/30 rounded-md text-sm text-white placeholder-gray-500"
                             />
                             <div className="flex items-center gap-2">
-                              <label className="text-sm text-gray-400">Pages:</label>
+                              <label className="text-sm text-green-400">Pages:</label>
                               <input
                                 type="number"
                                 value={range.start}
                                 onChange={(e) => updateSplitRange(range.id, 'start', parseInt(e.target.value))}
                                 min="1"
                                 max={totalPages}
-                                className="w-20 px-2 py-2 border border-gray-300 rounded-md text-sm"
+                                className="w-20 px-2 py-2 bg-gray-800/50 border border-green-500/30 rounded-md text-sm text-white"
                               />
                               <span className="text-gray-400">to</span>
                               <input
@@ -411,7 +411,7 @@ const PdfSplitter: React.FC = () => {
                                 onChange={(e) => updateSplitRange(range.id, 'end', parseInt(e.target.value))}
                                 min="1"
                                 max={totalPages}
-                                className="w-20 px-2 py-2 border border-gray-300 rounded-md text-sm"
+                                className="w-20 px-2 py-2 bg-gray-800/50 border border-green-500/30 rounded-md text-sm text-white"
                               />
                             </div>
                             <button
@@ -431,7 +431,7 @@ const PdfSplitter: React.FC = () => {
 
                 {splitMode === 'byPages' && (
                   <div>
-                    <h3 className="text-lg font-semibold text-gray-800 mb-3">Split into Individual Pages</h3>
+                    <h3 className="text-lg font-semibold text-green-400 mb-3">Split into Individual Pages</h3>
                     <label className="block mb-3 text-sm font-semibold text-green-400">
                       Enter page numbers (comma-separated, supports ranges)
                     </label>
@@ -440,17 +440,17 @@ const PdfSplitter: React.FC = () => {
                       value={pagesList}
                       onChange={(e) => setPagesList(e.target.value)}
                       placeholder="e.g., 1,3,5-7,10,15-20"
-                      className="w-full px-4 py-2 border border-gray-300 rounded-md"
+                      className="w-full px-4 py-2 bg-gray-800/50 border border-green-500/30 rounded-md text-white placeholder-gray-500"
                     />
-                    <p className="mt-2 text-sm text-gray-400">
-                      💡 Example: <code className="bg-gray-200 px-2 py-1 rounded">1,3,5-7,10</code> will create separate PDFs for pages 1, 3, 5, 6, 7, and 10
+                    <p className="mt-2 text-sm text-gray-300">
+                      💡 Example: <code className="bg-gray-800 px-2 py-1 rounded text-green-400">1,3,5-7,10</code> will create separate PDFs for pages 1, 3, 5, 6, 7, and 10
                     </p>
                   </div>
                 )}
 
                 {splitMode === 'extractPages' && (
                   <div>
-                    <h3 className="text-lg font-semibold text-gray-800 mb-3">Extract Specific Pages</h3>
+                    <h3 className="text-lg font-semibold text-green-400 mb-3">Extract Specific Pages</h3>
                     <label className="block mb-3 text-sm font-semibold text-green-400">
                       Enter page numbers to extract into one PDF
                     </label>
@@ -459,10 +459,10 @@ const PdfSplitter: React.FC = () => {
                       value={extractPages}
                       onChange={(e) => setExtractPages(e.target.value)}
                       placeholder="e.g., 1,3,5-7,10,15-20"
-                      className="w-full px-4 py-2 border border-gray-300 rounded-md"
+                      className="w-full px-4 py-2 bg-gray-800/50 border border-green-500/30 rounded-md text-white placeholder-gray-500"
                     />
-                    <p className="mt-2 text-sm text-gray-400">
-                      💡 Example: <code className="bg-gray-200 px-2 py-1 rounded">1,3,5-7,10</code> will extract pages 1, 3, 5, 6, 7, and 10 into <strong>one PDF</strong>
+                    <p className="mt-2 text-sm text-gray-300">
+                      💡 Example: <code className="bg-gray-800 px-2 py-1 rounded text-green-400">1,3,5-7,10</code> will extract pages 1, 3, 5, 6, 7, and 10 into <strong className="text-white">one PDF</strong>
                     </p>
                   </div>
                 )}
@@ -492,9 +492,9 @@ const PdfSplitter: React.FC = () => {
           )}
 
           {/* Info Section */}
-          <div className="mt-6 p-4 bg-green-500/20 rounded-lg border border-purple-200">
-            <h3 className="text-sm font-semibold text-purple-800 mb-2">📖 How to use:</h3>
-            <ol className="text-sm text-purple-700 space-y-1 list-decimal list-inside">
+          <div className="mt-6 p-4 bg-gradient-to-br from-green-500/10 to-emerald-500/10 rounded-lg border border-green-500/30">
+            <h3 className="text-sm font-semibold text-green-400 mb-2">📖 How to use:</h3>
+            <ol className="text-sm text-gray-300 space-y-1 list-decimal list-inside">
               <li>Upload a PDF file</li>
               <li>Choose a split mode that fits your needs</li>
               <li>Configure the split settings</li>

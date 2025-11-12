@@ -305,41 +305,41 @@ const PdfReorder: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-50 to-blue-100 p-8">
+    <div className="min-h-screen bg-transparent p-4 sm:p-6 lg:p-8">
       <div className="max-w-7xl mx-auto">
-        <div className="bg-white rounded-2xl shadow-xl p-8">
-          <div className="text-center mb-8">
-            <h1 className="text-4xl font-bold text-gray-800 mb-2">
+        <div className="bg-gradient-to-br from-gray-900 to-black rounded-2xl shadow-2xl border border-green-500/20 p-6 sm:p-8">
+          <div className="text-center mb-6 pb-4 border-b border-green-500/20">
+            <h1 className="text-3xl font-bold bg-gradient-to-r from-green-400 to-emerald-400 bg-clip-text text-transparent mb-2">
               🔄 Reorder PDF Pages
             </h1>
-            <p className="text-gray-600">
+            <p className="text-gray-400 text-sm">
               Drag-and-drop, reorder, duplicate, and delete pages
             </p>
           </div>
 
           {/* File Upload */}
           <div className="mb-8">
-            <label className="block text-sm font-semibold text-gray-700 mb-3">
+            <label className="block text-sm font-semibold text-green-400 mb-3">
               📄 Select PDF File
             </label>
             <input
               type="file"
               accept=".pdf,application/pdf"
               onChange={handleFileChange}
-              className="block w-full text-sm text-gray-500
+              className="block w-full text-sm text-gray-400
                 file:mr-4 file:py-3 file:px-6
-                file:rounded-lg file:border-0
+                file:rounded-xl file:border-0
                 file:text-sm file:font-semibold
-                file:bg-indigo-50 file:text-indigo-700
-                hover:file:bg-indigo-100 file:cursor-pointer
-                cursor-pointer border-2 border-dashed border-gray-300
-                rounded-lg p-4 hover:border-indigo-400 transition-colors"
+                file:bg-gradient-to-r file:from-green-500 file:to-emerald-600 file:text-black file:shadow-lg file:shadow-green-500/30
+                hover:file:from-green-400 hover:file:to-emerald-500 file:cursor-pointer
+                cursor-pointer bg-gray-800/50 border-2 border-green-500/30
+                rounded-xl p-4 hover:border-green-500/50 transition-colors"
             />
             {pdfFile && (
-              <p className="mt-3 text-sm text-gray-600 bg-indigo-50 p-3 rounded-lg">
-                ✓ Selected: <span className="font-semibold">{pdfFile.name}</span>
+              <p className="mt-3 text-sm text-gray-300 bg-green-500/20 border border-green-500/30 p-3 rounded-xl">
+                ✓ Selected: <span className="font-semibold text-green-400">{pdfFile.name}</span>
                 {' - '}
-                <span className="font-semibold">{pages.length} pages</span>
+                <span className="font-semibold text-green-400">{pages.length} pages</span>
               </p>
             )}
           </div>
@@ -347,28 +347,28 @@ const PdfReorder: React.FC = () => {
           {/* Loading State */}
           {loading && (
             <div className="text-center py-12">
-              <div className="inline-block animate-spin rounded-full h-16 w-16 border-4 border-indigo-500 border-t-transparent"></div>
-              <p className="mt-4 text-gray-600 font-semibold">Loading pages and generating thumbnails...</p>
+              <div className="inline-block animate-spin rounded-full h-16 w-16 border-4 border-green-500 border-t-transparent"></div>
+              <p className="mt-4 text-gray-300 font-semibold">Loading pages and generating thumbnails...</p>
             </div>
           )}
 
           {/* Toolbar */}
           {pages.length > 0 && !loading && (
-            <div className="mb-6 bg-gradient-to-r from-indigo-50 to-blue-50 rounded-xl p-6 border-2 border-indigo-200">
+            <div className="mb-6 bg-gradient-to-br from-gray-800/50 to-black/50 rounded-xl p-6 border border-green-500/30">
               <div className="flex flex-wrap gap-3">
                 <button
                   onClick={handleSelectAll}
-                  className="px-4 py-2 bg-indigo-600 text-white rounded-lg font-semibold hover:bg-indigo-700 transition-colors"
+                  className="px-4 py-2 bg-gradient-to-r from-green-500 to-emerald-600 text-black rounded-xl font-semibold hover:from-green-400 hover:to-emerald-500 transition-colors shadow-lg shadow-green-500/30"
                 >
                   {selectedPages.size === pages.length ? '❌ Deselect All' : '✅ Select All'}
                 </button>
                 <button
                   onClick={deleteSelectedPages}
                   disabled={selectedPages.size === 0}
-                  className={`px-4 py-2 rounded-lg font-semibold transition-colors ${
+                  className={`px-4 py-2 rounded-xl font-semibold transition-colors ${
                     selectedPages.size === 0
-                      ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
-                      : 'bg-red-600 text-white hover:bg-red-700'
+                      ? 'bg-gray-700 text-gray-500 cursor-not-allowed'
+                      : 'bg-gradient-to-r from-red-500 to-red-600 text-white hover:from-red-400 hover:to-red-500 shadow-lg shadow-red-500/30'
                   }`}
                 >
                   🗑️ Delete Selected ({selectedPages.size})
@@ -376,17 +376,17 @@ const PdfReorder: React.FC = () => {
                 <button
                   onClick={duplicateSelectedPages}
                   disabled={selectedPages.size === 0}
-                  className={`px-4 py-2 rounded-lg font-semibold transition-colors ${
+                  className={`px-4 py-2 rounded-xl font-semibold transition-colors ${
                     selectedPages.size === 0
-                      ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
-                      : 'bg-green-600 text-white hover:bg-green-700'
+                      ? 'bg-gray-700 text-gray-500 cursor-not-allowed'
+                      : 'bg-gradient-to-r from-emerald-500 to-emerald-600 text-black hover:from-emerald-400 hover:to-emerald-500 shadow-lg shadow-emerald-500/30'
                   }`}
                 >
                   📋 Duplicate Selected ({selectedPages.size})
                 </button>
                 <button
                   onClick={reverseOrder}
-                  className="px-4 py-2 bg-purple-600 text-white rounded-lg font-semibold hover:bg-purple-700 transition-colors"
+                  className="px-4 py-2 bg-gradient-to-r from-green-600 to-emerald-700 text-white rounded-xl font-semibold hover:from-green-500 hover:to-emerald-600 transition-colors shadow-lg shadow-green-500/30"
                 >
                   🔃 Reverse Order
                 </button>
@@ -394,10 +394,10 @@ const PdfReorder: React.FC = () => {
                   <button
                     onClick={generateReorderedPdf}
                     disabled={generating}
-                    className={`px-6 py-2 rounded-lg font-bold transition-colors ${
+                    className={`px-6 py-2 rounded-xl font-bold transition-colors ${
                       generating
-                        ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
-                        : 'bg-gradient-to-r from-indigo-500 to-blue-600 text-white hover:from-indigo-600 hover:to-blue-700'
+                        ? 'bg-gray-700 text-gray-500 cursor-not-allowed'
+                        : 'bg-gradient-to-r from-green-500 to-emerald-600 text-black hover:from-green-400 hover:to-emerald-500 shadow-lg shadow-green-500/30'
                     }`}
                   >
                     {generating ? '⏳ Generating...' : '💾 Save Reordered PDF'}
@@ -417,10 +417,10 @@ const PdfReorder: React.FC = () => {
                   onDragStart={(e) => handleDragStart(e, page.id)}
                   onDragOver={handleDragOver}
                   onDrop={(e) => handleDrop(e, page.id)}
-                  className={`relative bg-white rounded-xl shadow-lg overflow-hidden transition-all cursor-move ${
+                  className={`relative bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl shadow-lg overflow-hidden transition-all cursor-move border-2 ${
                     selectedPages.has(page.id)
-                      ? 'ring-4 ring-indigo-500 scale-95'
-                      : 'hover:shadow-xl hover:scale-105'
+                      ? 'ring-4 ring-green-500 scale-95 border-green-500'
+                      : 'hover:shadow-xl hover:shadow-green-500/20 hover:scale-105 border-green-500/20'
                   } ${draggedPage === page.id ? 'opacity-50' : ''}`}
                 >
                   {/* Selection Checkbox */}
@@ -430,17 +430,17 @@ const PdfReorder: React.FC = () => {
                       checked={selectedPages.has(page.id)}
                       onChange={() => handlePageSelect(page.id)}
                       onClick={(e) => e.stopPropagation()}
-                      className="w-5 h-5 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500 cursor-pointer"
+                      className="w-5 h-5 text-green-600 bg-gray-800 border-green-500/30 rounded focus:ring-green-500 cursor-pointer accent-green-500"
                     />
                   </div>
 
                   {/* Page Number Badge */}
-                  <div className="absolute top-2 right-2 bg-indigo-600 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg z-10">
+                  <div className="absolute top-2 right-2 bg-gradient-to-r from-green-500 to-emerald-600 text-black text-xs font-bold px-3 py-1 rounded-full shadow-lg z-10">
                     {index + 1}
                   </div>
 
                   {/* Thumbnail */}
-                  <div className="aspect-[3/4] bg-gray-100 flex items-center justify-center overflow-hidden">
+                  <div className="aspect-[3/4] bg-gray-950 flex items-center justify-center overflow-hidden border-b border-green-500/20">
                     <img
                       src={page.thumbnail}
                       alt={`Page ${index + 1}`}
@@ -449,15 +449,15 @@ const PdfReorder: React.FC = () => {
                   </div>
 
                   {/* Action Buttons */}
-                  <div className="p-3 bg-gray-50 space-y-2">
+                  <div className="p-3 bg-gray-900/50 space-y-2">
                     <div className="grid grid-cols-2 gap-2">
                       <button
                         onClick={() => movePageUp(page.id)}
                         disabled={index === 0}
                         className={`p-2 rounded-lg text-sm font-semibold transition-colors ${
                           index === 0
-                            ? 'bg-gray-200 text-gray-400 cursor-not-allowed'
-                            : 'bg-blue-500 text-white hover:bg-blue-600'
+                            ? 'bg-gray-800 text-gray-600 cursor-not-allowed'
+                            : 'bg-green-500 text-black hover:bg-green-400 shadow-md shadow-green-500/30'
                         }`}
                         title="Move Up"
                       >
@@ -468,8 +468,8 @@ const PdfReorder: React.FC = () => {
                         disabled={index === pages.length - 1}
                         className={`p-2 rounded-lg text-sm font-semibold transition-colors ${
                           index === pages.length - 1
-                            ? 'bg-gray-200 text-gray-400 cursor-not-allowed'
-                            : 'bg-blue-500 text-white hover:bg-blue-600'
+                            ? 'bg-gray-800 text-gray-600 cursor-not-allowed'
+                            : 'bg-green-500 text-black hover:bg-green-400 shadow-md shadow-green-500/30'
                         }`}
                         title="Move Down"
                       >
@@ -479,7 +479,7 @@ const PdfReorder: React.FC = () => {
                     <div className="grid grid-cols-2 gap-2">
                       <button
                         onClick={() => duplicatePage(page.id)}
-                        className="p-2 rounded-lg text-sm font-semibold bg-green-500 text-white hover:bg-green-600 transition-colors"
+                        className="p-2 rounded-lg text-sm font-semibold bg-emerald-500 text-black hover:bg-emerald-400 transition-colors shadow-md shadow-emerald-500/30"
                         title="Duplicate"
                       >
                         📋
@@ -489,15 +489,15 @@ const PdfReorder: React.FC = () => {
                         disabled={pages.length === 1}
                         className={`p-2 rounded-lg text-sm font-semibold transition-colors ${
                           pages.length === 1
-                            ? 'bg-gray-200 text-gray-400 cursor-not-allowed'
-                            : 'bg-red-500 text-white hover:bg-red-600'
+                            ? 'bg-gray-800 text-gray-600 cursor-not-allowed'
+                            : 'bg-red-500 text-white hover:bg-red-400 shadow-md shadow-red-500/30'
                         }`}
                         title="Delete"
                       >
                         🗑️
                       </button>
                     </div>
-                    <div className="text-xs text-gray-500 text-center mt-2">
+                    <div className="text-xs text-gray-400 text-center mt-2">
                       Original: Page {page.pageNumber}
                     </div>
                   </div>
@@ -508,45 +508,45 @@ const PdfReorder: React.FC = () => {
 
           {/* Empty State */}
           {!loading && pages.length === 0 && pdfFile && (
-            <div className="text-center py-12 text-gray-500">
+            <div className="text-center py-12 text-gray-400">
               <p className="text-lg">No pages loaded. Please try selecting a different PDF file.</p>
             </div>
           )}
 
           {/* Info Section */}
           {pages.length > 0 && !loading && (
-            <div className="mt-8 bg-blue-50 rounded-xl p-6 border-l-4 border-blue-500">
-              <h3 className="font-semibold text-blue-900 mb-3 flex items-center gap-2">
+            <div className="mt-8 bg-gradient-to-br from-green-500/10 to-emerald-500/10 rounded-xl p-6 border-l-4 border-green-500">
+              <h3 className="font-semibold text-green-400 mb-3 flex items-center gap-2">
                 <span>💡</span> How to Reorder Pages
               </h3>
-              <ul className="space-y-2 text-sm text-blue-800">
+              <ul className="space-y-2 text-sm text-gray-300">
                 <li className="flex items-start gap-2">
-                  <span className="text-blue-500 mt-1">•</span>
-                  <span><strong>Drag & Drop:</strong> Click and drag any page thumbnail to reorder</span>
+                  <span className="text-green-500 mt-1">•</span>
+                  <span><strong className="text-white">Drag & Drop:</strong> Click and drag any page thumbnail to reorder</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="text-blue-500 mt-1">•</span>
-                  <span><strong>Move Buttons:</strong> Use ▲ and ▼ buttons to move pages up or down</span>
+                  <span className="text-green-500 mt-1">•</span>
+                  <span><strong className="text-white">Move Buttons:</strong> Use ▲ and ▼ buttons to move pages up or down</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="text-blue-500 mt-1">•</span>
-                  <span><strong>Select Multiple:</strong> Check boxes to select pages, then use bulk actions</span>
+                  <span className="text-green-500 mt-1">•</span>
+                  <span><strong className="text-white">Select Multiple:</strong> Check boxes to select pages, then use bulk actions</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="text-blue-500 mt-1">•</span>
-                  <span><strong>Duplicate:</strong> Create copies of pages using the 📋 button</span>
+                  <span className="text-green-500 mt-1">•</span>
+                  <span><strong className="text-white">Duplicate:</strong> Create copies of pages using the 📋 button</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="text-blue-500 mt-1">•</span>
-                  <span><strong>Delete:</strong> Remove unwanted pages (must keep at least 1 page)</span>
+                  <span className="text-green-500 mt-1">•</span>
+                  <span><strong className="text-white">Delete:</strong> Remove unwanted pages (must keep at least 1 page)</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="text-blue-500 mt-1">•</span>
-                  <span><strong>Reverse Order:</strong> Quickly flip the entire page order</span>
+                  <span className="text-green-500 mt-1">•</span>
+                  <span><strong className="text-white">Reverse Order:</strong> Quickly flip the entire page order</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="text-blue-500 mt-1">•</span>
-                  <span><strong>Save:</strong> Click "Save Reordered PDF" to download your reordered document</span>
+                  <span className="text-green-500 mt-1">•</span>
+                  <span><strong className="text-white">Save:</strong> Click "Save Reordered PDF" to download your reordered document</span>
                 </li>
               </ul>
             </div>

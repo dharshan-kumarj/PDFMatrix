@@ -253,7 +253,17 @@ const ImagesToPdf: React.FC = () => {
     <div className="min-h-screen bg-transparent p-4 sm:p-6 lg:p-8">
       <div className="max-w-6xl mx-auto">
         <div className="bg-gradient-to-br from-gray-900 to-black rounded-2xl shadow-2xl border border-green-500/20 p-6 sm:p-8">
-          <h1 className="text-3xl font-bold bg-gradient-to-r from-green-400 to-emerald-400 bg-clip-text text-transparent mb-2">🖼️➡️📄 Images to PDF</h1>
+          <div className="text-center mb-6 pb-4 border-b border-green-500/20">
+            <h1 className="text-3xl font-bold mb-2 flex items-center justify-center gap-3">
+              <span className="text-4xl">🖼️📄</span>
+              <span className="bg-gradient-to-r from-green-400 to-emerald-400 bg-clip-text text-transparent">
+                Images to PDF
+              </span>
+            </h1>
+            <p className="text-gray-400 text-sm">
+              Select images to convert
+            </p>
+          </div>
 
           {/* File Upload */}
           <div className="mb-6">
@@ -281,8 +291,8 @@ const ImagesToPdf: React.FC = () => {
           {/* PDF Settings */}
           {imageFiles.length > 0 && (
             <>
-              <div className="mb-6 p-6 bg-gradient-to-r from-gray-800 to-gray-900 rounded-xl border border-green-500/20">
-                <h3 className="text-lg font-semibold text-white mb-4">PDF Settings</h3>
+              <div className="mb-6 p-6 bg-gradient-to-br from-gray-800/50 to-black/50 rounded-xl border border-green-500/30">
+                <h3 className="text-lg font-semibold text-green-400 mb-4">PDF Settings</h3>
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                   {/* Page Size */}
@@ -293,7 +303,7 @@ const ImagesToPdf: React.FC = () => {
                     <select
                       value={pageSize}
                       onChange={(e) => setPageSize(e.target.value as PageSize)}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg"
+                      className="w-full px-3 py-2 bg-gray-800/50 border border-green-500/30 rounded-lg text-white"
                     >
                       <option value="A4">A4 (210 × 297 mm)</option>
                       <option value="Letter">Letter (8.5 × 11 in)</option>
@@ -311,7 +321,7 @@ const ImagesToPdf: React.FC = () => {
                     <select
                       value={imageFit}
                       onChange={(e) => setImageFit(e.target.value as ImageFit)}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg"
+                      className="w-full px-3 py-2 bg-gray-800/50 border border-green-500/30 rounded-lg text-white"
                     >
                       <option value="fit">Fit (maintain ratio)</option>
                       <option value="fill">Fill (crop if needed)</option>
@@ -331,7 +341,7 @@ const ImagesToPdf: React.FC = () => {
                       step="5"
                       value={margin}
                       onChange={(e) => setMargin(parseInt(e.target.value))}
-                      className="w-full"
+                      className="w-full accent-green-500"
                     />
                   </div>
                 </div>
@@ -340,12 +350,12 @@ const ImagesToPdf: React.FC = () => {
               {/* Images List */}
               <div className="mb-6">
                 <div className="flex justify-between items-center mb-3">
-                  <h3 className="text-lg font-semibold text-white">
+                  <h3 className="text-lg font-semibold text-green-400">
                     Images ({imageFiles.length})
                   </h3>
                   <button
                     onClick={clearAllImages}
-                    className="text-sm text-red-600 hover:text-red-700 font-medium"
+                    className="text-sm text-red-400 hover:text-red-300 font-medium"
                   >
                     Clear All
                   </button>
@@ -359,22 +369,22 @@ const ImagesToPdf: React.FC = () => {
                       onDragStart={() => handleDragStart(index)}
                       onDragOver={handleDragOver}
                       onDrop={(e) => handleDrop(e, index)}
-                      className={`border-2 rounded-xl overflow-hidden transition-all cursor-move ${
+                      className={`border-2 border-green-500/30 rounded-xl overflow-hidden transition-all cursor-move ${
                         draggedIndex === index ? 'opacity-50' : ''
-                      } hover:border-green-500/40`}
+                      } hover:border-green-500/50 bg-gray-900/50`}
                     >
                       <div className="relative p-2 bg-gray-800/50">
                         <img
                           src={image.dataUrl}
                           alt={image.name}
-                          className="w-full h-48 object-contain"
+                          className="w-full h-48 object-contain rounded"
                         />
-                        <div className="absolute top-2 left-2 bg-green-500/200 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold text-sm">
+                        <div className="absolute top-2 left-2 bg-green-500 text-black rounded-full w-8 h-8 flex items-center justify-center font-bold text-sm shadow-lg">
                           {index + 1}
                         </div>
                       </div>
 
-                      <div className="p-3 bg-white">
+                      <div className="p-3 bg-gray-900/50 border-t border-green-500/30">
                         <p className="text-sm font-medium text-green-400 mb-2 truncate">
                           {image.name}
                         </p>
@@ -420,7 +430,7 @@ const ImagesToPdf: React.FC = () => {
                 disabled={isConverting}
                 className="w-full px-6 py-3 bg-gradient-to-r from-green-500 to-emerald-600 text-black font-bold rounded-xl
                   hover:from-green-400 hover:to-emerald-500 disabled:from-gray-700 disabled:to-gray-800 disabled:text-gray-500 disabled:cursor-not-allowed
-                  transition-colors shadow-md hover:shadow-lg"
+                  transition-colors shadow-lg shadow-green-500/30 hover:shadow-xl"
               >
                 {isConverting ? (
                   <span className="flex items-center justify-center gap-2">
@@ -447,11 +457,11 @@ const ImagesToPdf: React.FC = () => {
               <li>Click "Create PDF" to download your PDF</li>
             </ol>
             <div className="mt-3 text-sm text-gray-300">
-              <p><strong>Image Fit Modes:</strong></p>
+              <p className="font-semibold text-green-400"><strong>Image Fit Modes:</strong></p>
               <ul className="list-disc list-inside ml-4 mt-1">
-                <li><strong>Fit:</strong> Centers image and scales to fit page (recommended)</li>
-                <li><strong>Fill:</strong> Fills page completely, may crop image</li>
-                <li><strong>Stretch:</strong> Stretches image to fill page, may distort</li>
+                <li><strong className="text-white">Fit:</strong> Centers image and scales to fit page (recommended)</li>
+                <li><strong className="text-white">Fill:</strong> Fills page completely, may crop image</li>
+                <li><strong className="text-white">Stretch:</strong> Stretches image to fill page, may distort</li>
               </ul>
             </div>
           </div>

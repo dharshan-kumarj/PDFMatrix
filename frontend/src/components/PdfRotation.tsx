@@ -255,8 +255,8 @@ const PdfRotation: React.FC = () => {
           {!isLoading && pdfFile && pageRotations.length > 0 && (
             <>
               {/* Global Rotation Controls */}
-              <div className="mb-6 p-6 bg-gradient-to-r from-orange-50 to-red-50 rounded-xl border border-orange-200">
-                <h3 className="text-lg font-semibold text-white mb-4">Quick Actions</h3>
+              <div className="mb-6 p-6 bg-gradient-to-br from-gray-800/50 to-black/50 rounded-xl border border-green-500/30">
+                <h3 className="text-lg font-semibold text-green-400 mb-4">Quick Actions</h3>
                 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                   {/* Rotate All */}
@@ -265,19 +265,19 @@ const PdfRotation: React.FC = () => {
                     <div className="flex gap-2">
                       <button
                         onClick={() => rotateAllPages(90)}
-                        className="flex-1 px-4 py-2 bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-lg hover:from-green-400 hover:to-emerald-500 font-medium text-sm"
+                        className="flex-1 px-4 py-2 bg-gradient-to-r from-green-500 to-emerald-600 text-black rounded-lg hover:from-green-400 hover:to-emerald-500 font-medium text-sm shadow-lg shadow-green-500/30"
                       >
                         ↻ 90° Right
                       </button>
                       <button
                         onClick={() => rotateAllPages(-90)}
-                        className="flex-1 px-4 py-2 bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-lg hover:from-green-400 hover:to-emerald-500 font-medium text-sm"
+                        className="flex-1 px-4 py-2 bg-gradient-to-r from-green-500 to-emerald-600 text-black rounded-lg hover:from-green-400 hover:to-emerald-500 font-medium text-sm shadow-lg shadow-green-500/30"
                       >
                         ↺ 90° Left
                       </button>
                       <button
                         onClick={() => rotateAllPages(180)}
-                        className="flex-1 px-4 py-2 bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-lg hover:from-green-400 hover:to-emerald-500 font-medium text-sm"
+                        className="flex-1 px-4 py-2 bg-gradient-to-r from-green-500 to-emerald-600 text-black rounded-lg hover:from-green-400 hover:to-emerald-500 font-medium text-sm shadow-lg shadow-green-500/30"
                       >
                         ⟲ 180°
                       </button>
@@ -293,21 +293,21 @@ const PdfRotation: React.FC = () => {
                       <button
                         onClick={() => rotateSelectedPages(90)}
                         disabled={selectedPages.size === 0}
-                        className="flex-1 px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 disabled:from-gray-700 disabled:to-gray-800 disabled:text-gray-500 disabled:cursor-not-allowed font-medium text-sm"
+                        className="flex-1 px-4 py-2 bg-gradient-to-r from-red-500 to-red-600 text-white rounded-lg hover:from-red-400 hover:to-red-500 disabled:from-gray-700 disabled:to-gray-800 disabled:text-gray-500 disabled:cursor-not-allowed font-medium text-sm shadow-lg shadow-red-500/30"
                       >
                         ↻ 90° Right
                       </button>
                       <button
                         onClick={() => rotateSelectedPages(-90)}
                         disabled={selectedPages.size === 0}
-                        className="flex-1 px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 disabled:from-gray-700 disabled:to-gray-800 disabled:text-gray-500 disabled:cursor-not-allowed font-medium text-sm"
+                        className="flex-1 px-4 py-2 bg-gradient-to-r from-red-500 to-red-600 text-white rounded-lg hover:from-red-400 hover:to-red-500 disabled:from-gray-700 disabled:to-gray-800 disabled:text-gray-500 disabled:cursor-not-allowed font-medium text-sm shadow-lg shadow-red-500/30"
                       >
                         ↺ 90° Left
                       </button>
                       <button
                         onClick={() => rotateSelectedPages(180)}
                         disabled={selectedPages.size === 0}
-                        className="flex-1 px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 disabled:from-gray-700 disabled:to-gray-800 disabled:text-gray-500 disabled:cursor-not-allowed font-medium text-sm"
+                        className="flex-1 px-4 py-2 bg-gradient-to-r from-red-500 to-red-600 text-white rounded-lg hover:from-red-400 hover:to-red-500 disabled:from-gray-700 disabled:to-gray-800 disabled:text-gray-500 disabled:cursor-not-allowed font-medium text-sm shadow-lg shadow-red-500/30"
                       >
                         ⟲ 180°
                       </button>
@@ -340,7 +340,7 @@ const PdfRotation: React.FC = () => {
 
               {/* Page Thumbnails Grid */}
               <div className="mb-6">
-                <h3 className="text-lg font-semibold text-white mb-3">
+                <h3 className="text-lg font-semibold text-green-400 mb-3">
                   Pages (Click to select, then use individual controls)
                 </h3>
                 <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
@@ -356,7 +356,7 @@ const PdfRotation: React.FC = () => {
                     >
                       {/* Selection Indicator */}
                       {selectedPages.has(page.pageNumber) && (
-                        <div className="absolute top-2 right-2 bg-green-500/200 text-white rounded-full w-6 h-6 flex items-center justify-center z-10">
+                        <div className="absolute top-2 right-2 bg-green-500 text-white rounded-full w-6 h-6 flex items-center justify-center z-10 font-bold">
                           ✓
                         </div>
                       )}
@@ -375,11 +375,11 @@ const PdfRotation: React.FC = () => {
                       </div>
 
                       {/* Page Info & Controls */}
-                      <div className="p-3 bg-white">
+                      <div className="p-3 bg-gray-900/50">
                         <p className="text-sm font-semibold text-green-400 mb-2">
                           Page {page.pageNumber}
                           {page.rotation !== 0 && (
-                            <span className="ml-2 text-orange-600">({page.rotation}°)</span>
+                            <span className="ml-2 text-emerald-400">({page.rotation}°)</span>
                           )}
                         </p>
 

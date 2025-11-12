@@ -209,31 +209,50 @@ const PdfToImages: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-cyan-100 p-8">
+    <div className="min-h-screen bg-transparent p-4 sm:p-6 lg:p-8">
       <div className="max-w-6xl mx-auto">
-        <div className="bg-white rounded-lg shadow-xl p-8">
-          <h1 className="text-3xl font-bold text-gray-800 mb-6">📄➡️🖼️ PDF to Images</h1>
+        <div className="bg-gradient-to-br from-gray-900 to-black rounded-2xl shadow-2xl border border-green-500/20 p-6 sm:p-8">
+          <div className="text-center mb-6 pb-4 border-b border-green-500/20">
+            <h1 className="text-3xl font-bold mb-2 flex items-center justify-center gap-3">
+              <span className="text-4xl">📄🖼️</span>
+              <span className="bg-gradient-to-r from-green-400 to-emerald-400 bg-clip-text text-transparent">
+                PDF to Images
+              </span>
+            </h1>
+            <p className="text-gray-400 text-sm">
+              Convert PDF pages to high-quality images
+            </p>
+          </div>
 
           {/* File Upload */}
           <div className="mb-6">
-            <label className="block mb-2 text-sm font-medium text-gray-700">
+            <label className="block mb-3 text-sm font-semibold text-green-400">
               Select PDF file
             </label>
-            <input
-              type="file"
-              accept="application/pdf"
-              onChange={handleFileSelect}
-              className="block w-full text-sm text-gray-500
-                file:mr-4 file:py-2 file:px-4
-                file:rounded-md file:border-0
-                file:text-sm file:font-semibold
-                file:bg-blue-50 file:text-blue-700
-                hover:file:bg-blue-100
-                cursor-pointer"
-            />
+            <div className="relative">
+              <input
+                type="file"
+                accept="application/pdf"
+                onChange={handleFileSelect}
+                className="block w-full text-sm text-gray-400
+                  file:mr-4 file:py-3 file:px-6
+                  file:rounded-lg file:border-0
+                  file:text-sm file:font-semibold
+                  file:bg-gradient-to-r file:from-green-500 file:to-emerald-600
+                  file:text-black file:shadow-lg file:shadow-green-500/30
+                  hover:file:from-green-400 hover:file:to-emerald-500
+                  file:transition-all file:duration-200
+                  cursor-pointer
+                  bg-gray-800/50 border-2 border-green-500/30 rounded-lg p-3
+                  hover:border-green-500/50 transition-colors"
+              />
+            </div>
             {pdfFile && (
-              <p className="mt-2 text-sm text-gray-600">
-                📄 <strong>{pdfFile.name}</strong> - {totalPages} pages
+              <p className="mt-3 text-sm text-gray-300 flex items-center gap-2">
+                <span className="text-green-400">📄</span> 
+                <strong className="text-green-400">{pdfFile.name}</strong> 
+                <span className="text-gray-400">-</span>
+                <span className="text-gray-400">{totalPages} pages</span>
               </p>
             )}
           </div>
@@ -241,13 +260,13 @@ const PdfToImages: React.FC = () => {
           {/* Conversion Settings */}
           {pdfFile && (
             <>
-              <div className="mb-6 p-6 bg-gray-50 rounded-lg border border-gray-200">
-                <h3 className="text-lg font-semibold text-gray-800 mb-4">Conversion Settings</h3>
+              <div className="mb-6 p-6 bg-gradient-to-br from-gray-800/50 to-black/50 rounded-lg border border-green-500/30">
+                <h3 className="text-lg font-semibold text-green-400 mb-4">Conversion Settings</h3>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   {/* Image Format */}
                   <div>
-                    <label className="block mb-2 text-sm font-medium text-gray-700">
+                    <label className="block mb-2 text-sm font-medium text-green-400">
                       Image Format
                     </label>
                     <div className="flex gap-3">
@@ -255,8 +274,8 @@ const PdfToImages: React.FC = () => {
                         onClick={() => setImageFormat('png')}
                         className={`flex-1 px-4 py-3 rounded-lg border-2 font-medium transition-all ${
                           imageFormat === 'png'
-                            ? 'border-blue-500 bg-blue-50 text-blue-700'
-                            : 'border-gray-200 text-gray-700 hover:border-blue-300'
+                            ? 'border-green-500 bg-green-500/20 text-white'
+                            : 'border-green-500/30 text-gray-300 hover:border-green-500/50 bg-gray-800/50'
                         }`}
                       >
                         PNG (Lossless)
@@ -265,8 +284,8 @@ const PdfToImages: React.FC = () => {
                         onClick={() => setImageFormat('jpeg')}
                         className={`flex-1 px-4 py-3 rounded-lg border-2 font-medium transition-all ${
                           imageFormat === 'jpeg'
-                            ? 'border-blue-500 bg-blue-50 text-blue-700'
-                            : 'border-gray-200 text-gray-700 hover:border-blue-300'
+                            ? 'border-green-500 bg-green-500/20 text-white'
+                            : 'border-green-500/30 text-gray-300 hover:border-green-500/50 bg-gray-800/50'
                         }`}
                       >
                         JPEG (Smaller)
@@ -277,7 +296,7 @@ const PdfToImages: React.FC = () => {
                   {/* Quality (for JPEG) */}
                   {imageFormat === 'jpeg' && (
                     <div>
-                      <label className="block mb-2 text-sm font-medium text-gray-700">
+                      <label className="block mb-2 text-sm font-medium text-green-400">
                         JPEG Quality: {Math.round(imageQuality * 100)}%
                       </label>
                       <input
@@ -287,9 +306,9 @@ const PdfToImages: React.FC = () => {
                         step="0.05"
                         value={imageQuality}
                         onChange={(e) => setImageQuality(parseFloat(e.target.value))}
-                        className="w-full"
+                        className="w-full accent-green-500"
                       />
-                      <div className="flex justify-between text-xs text-gray-500 mt-1">
+                      <div className="flex justify-between text-xs text-gray-400 mt-1">
                         <span>Lower size</span>
                         <span>Better quality</span>
                       </div>
@@ -298,7 +317,7 @@ const PdfToImages: React.FC = () => {
 
                   {/* Resolution/DPI */}
                   <div>
-                    <label className="block mb-2 text-sm font-medium text-gray-700">
+                    <label className="block mb-2 text-sm font-medium text-green-400">
                       Resolution: {scale}x ({scale * 72} DPI)
                     </label>
                     <input
@@ -308,9 +327,9 @@ const PdfToImages: React.FC = () => {
                       step="0.5"
                       value={scale}
                       onChange={(e) => setScale(parseFloat(e.target.value))}
-                      className="w-full"
+                      className="w-full accent-green-500"
                     />
-                    <div className="flex justify-between text-xs text-gray-500 mt-1">
+                    <div className="flex justify-between text-xs text-gray-400 mt-1">
                       <span>1x (72 DPI)</span>
                       <span>2x (144 DPI)</span>
                       <span>3x (216 DPI)</span>
@@ -320,7 +339,7 @@ const PdfToImages: React.FC = () => {
 
                   {/* Page Selection */}
                   <div>
-                    <label className="block mb-2 text-sm font-medium text-gray-700">
+                    <label className="block mb-2 text-sm font-medium text-green-400">
                       Pages to Convert
                     </label>
                     <div className="flex gap-3 mb-2">
@@ -328,8 +347,8 @@ const PdfToImages: React.FC = () => {
                         onClick={() => setSelectedPages('all')}
                         className={`flex-1 px-4 py-2 rounded-lg border-2 font-medium transition-all ${
                           selectedPages === 'all'
-                            ? 'border-blue-500 bg-blue-50 text-blue-700'
-                            : 'border-gray-200 text-gray-700 hover:border-blue-300'
+                            ? 'border-green-500 bg-green-500/20 text-white'
+                            : 'border-green-500/30 text-gray-300 hover:border-green-500/50 bg-gray-800/50'
                         }`}
                       >
                         All Pages
@@ -338,8 +357,8 @@ const PdfToImages: React.FC = () => {
                         onClick={() => setSelectedPages('custom')}
                         className={`flex-1 px-4 py-2 rounded-lg border-2 font-medium transition-all ${
                           selectedPages === 'custom'
-                            ? 'border-blue-500 bg-blue-50 text-blue-700'
-                            : 'border-gray-200 text-gray-700 hover:border-blue-300'
+                            ? 'border-green-500 bg-green-500/20 text-white'
+                            : 'border-green-500/30 text-gray-300 hover:border-green-500/50 bg-gray-800/50'
                         }`}
                       >
                         Custom
@@ -351,7 +370,7 @@ const PdfToImages: React.FC = () => {
                         value={customPages}
                         onChange={(e) => setCustomPages(e.target.value)}
                         placeholder="e.g., 1,3,5-7,10"
-                        className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm"
+                        className="w-full px-3 py-2 bg-gray-800/50 border border-green-500/30 rounded-md text-sm text-white placeholder-gray-500"
                       />
                     )}
                   </div>
@@ -362,9 +381,9 @@ const PdfToImages: React.FC = () => {
               <button
                 onClick={convertPdfToImages}
                 disabled={isConverting}
-                className="w-full px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg
-                  hover:bg-blue-700 disabled:bg-gray-300 disabled:cursor-not-allowed
-                  transition-colors shadow-md hover:shadow-lg mb-6"
+                className="w-full px-6 py-3 bg-gradient-to-r from-green-500 to-emerald-600 text-black font-bold rounded-lg
+                  hover:from-green-400 hover:to-emerald-500 disabled:from-gray-700 disabled:to-gray-800 disabled:text-gray-500 disabled:cursor-not-allowed
+                  transition-colors shadow-lg shadow-green-500/30 hover:shadow-xl mb-6"
               >
                 {isConverting ? (
                   <span className="flex items-center justify-center gap-2">
@@ -382,20 +401,20 @@ const PdfToImages: React.FC = () => {
               {/* Converted Images */}
               {convertedImages.length > 0 && (
                 <div>
-                  <div className="flex justify-between items-center mb-4">
-                    <h3 className="text-lg font-semibold text-gray-800">
+                  <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 mb-4">
+                    <h3 className="text-lg font-semibold text-green-400">
                       Converted Images ({convertedImages.length})
                     </h3>
-                    <div className="flex gap-2">
+                    <div className="flex flex-wrap gap-2">
                       <button
                         onClick={downloadAllAsZip}
-                        className="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 text-sm font-medium"
+                        className="px-4 py-2 bg-gradient-to-r from-green-500 to-emerald-600 text-black rounded-md hover:from-green-400 hover:to-emerald-500 text-sm font-bold shadow-lg shadow-green-500/30"
                       >
                         📦 Download All as ZIP
                       </button>
                       <button
                         onClick={downloadAllIndividually}
-                        className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 text-sm font-medium"
+                        className="px-4 py-2 bg-gradient-to-r from-green-500 to-emerald-600 text-black rounded-md hover:from-green-400 hover:to-emerald-500 text-sm font-bold shadow-lg shadow-green-500/30"
                       >
                         ⬇️ Download All Individually
                       </button>
@@ -404,21 +423,21 @@ const PdfToImages: React.FC = () => {
 
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                     {convertedImages.map((image) => (
-                      <div key={image.pageNumber} className="border rounded-lg overflow-hidden bg-gray-50">
-                        <div className="p-2 bg-white">
+                      <div key={image.pageNumber} className="border border-green-500/30 rounded-lg overflow-hidden bg-gray-900/50">
+                        <div className="p-2 bg-gray-800/50">
                           <img
                             src={image.dataUrl}
                             alt={`Page ${image.pageNumber}`}
-                            className="w-full h-auto"
+                            className="w-full h-auto rounded"
                           />
                         </div>
-                        <div className="p-3 bg-white border-t">
-                          <p className="text-sm font-medium text-gray-700 mb-2">
+                        <div className="p-3 bg-gray-900/50 border-t border-green-500/30">
+                          <p className="text-sm font-medium text-green-400 mb-2">
                             Page {image.pageNumber}
                           </p>
                           <button
                             onClick={() => downloadImage(image)}
-                            className="w-full px-3 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 text-sm font-medium"
+                            className="w-full px-3 py-2 bg-gradient-to-r from-green-500 to-emerald-600 text-black rounded-md hover:from-green-400 hover:to-emerald-500 text-sm font-bold shadow-lg shadow-green-500/30"
                           >
                             ⬇️ Download
                           </button>
@@ -432,13 +451,13 @@ const PdfToImages: React.FC = () => {
           )}
 
           {/* Info Section */}
-          <div className="mt-6 p-4 bg-blue-50 rounded-lg border border-blue-200">
-            <h3 className="text-sm font-semibold text-blue-800 mb-2">💡 Tips:</h3>
-            <ul className="text-sm text-blue-700 space-y-1 list-disc list-inside">
-              <li><strong>PNG</strong> format preserves quality but creates larger files</li>
-              <li><strong>JPEG</strong> format creates smaller files, adjust quality as needed</li>
+          <div className="mt-6 p-4 bg-gradient-to-br from-green-500/10 to-emerald-500/10 rounded-lg border border-green-500/30">
+            <h3 className="text-sm font-semibold text-green-400 mb-2">💡 Tips:</h3>
+            <ul className="text-sm text-gray-300 space-y-1 list-disc list-inside">
+              <li><strong className="text-white">PNG</strong> format preserves quality but creates larger files</li>
+              <li><strong className="text-white">JPEG</strong> format creates smaller files, adjust quality as needed</li>
               <li>Higher resolution (DPI) means better quality but larger file size</li>
-              <li>Use <strong>2x (144 DPI)</strong> for screen viewing, <strong>3x (216 DPI)</strong> for printing</li>
+              <li>Use <strong className="text-white">2x (144 DPI)</strong> for screen viewing, <strong className="text-white">3x (216 DPI)</strong> for printing</li>
               <li>Download all as ZIP for easy organization</li>
             </ul>
           </div>

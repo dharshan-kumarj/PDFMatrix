@@ -12,11 +12,11 @@ interface SplitRange {
 
 const PdfSplitter: React.FC = () => {
   const [pdfFile, setPdfFile] = useState<File | null>(null);
-  const [pdfDoc, setPdfDoc] = useState<PDFDocument | null>(null);
+  const [_pdfDoc, setPdfDoc] = useState<PDFDocument | null>(null);
   const [pdfData, setPdfData] = useState<Uint8Array | null>(null);
   const [totalPages, setTotalPages] = useState(0);
   const [splitMode, setSplitMode] = useState<SplitMode>('byRange');
-  const [isLoading, setIsLoading] = useState(false);
+  const [_isLoading, setIsLoading] = useState(false);
   const [isSplitting, setIsSplitting] = useState(false);
 
   // For 'byRange' mode - multiple custom ranges

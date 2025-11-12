@@ -52,7 +52,7 @@ const PdfMerger: React.FC = () => {
     setDraggedIndex(index);
   };
 
-  const handleDragOver = (e: React.DragEvent, index: number) => {
+  const handleDragOver = (e: React.DragEvent) => {
     e.preventDefault();
   };
 
@@ -202,7 +202,7 @@ const PdfMerger: React.FC = () => {
                     key={pdf.id}
                     draggable
                     onDragStart={() => handleDragStart(index)}
-                    onDragOver={(e) => handleDragOver(e, index)}
+                    onDragOver={(e) => handleDragOver(e)}
                     onDrop={(e) => handleDrop(e, index)}
                     className={`flex items-center justify-between p-4 
                       bg-gradient-to-r from-gray-800 to-gray-900 

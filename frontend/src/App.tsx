@@ -2,9 +2,10 @@ import { useState } from 'react';
 import './App.css';
 import PdfMerger from './components/PdfMerger';
 import PdfSplitter from './components/PdfSplitter';
+import PdfCompressor from './components/PdfCompressor';
 
 function App() {
-  const [activeTab, setActiveTab] = useState<'merger' | 'splitter'>('merger');
+  const [activeTab, setActiveTab] = useState<'merger' | 'splitter' | 'compressor'>('merger');
 
   return (
     <div>
@@ -32,12 +33,24 @@ function App() {
             >
               ✂️ PDF Splitter
             </button>
+            <button
+              onClick={() => setActiveTab('compressor')}
+              className={`px-6 py-4 font-semibold transition-colors border-b-2 ${
+                activeTab === 'compressor'
+                  ? 'text-green-600 border-green-600'
+                  : 'text-gray-500 border-transparent hover:text-gray-700'
+              }`}
+            >
+              🗜️ PDF Compressor
+            </button>
           </div>
         </div>
       </div>
 
       {/* Tab Content */}
-      {activeTab === 'merger' ? <PdfMerger /> : <PdfSplitter />}
+      {activeTab === 'merger' && <PdfMerger />}
+      {activeTab === 'splitter' && <PdfSplitter />}
+      {activeTab === 'compressor' && <PdfCompressor />}
     </div>
   );
 }

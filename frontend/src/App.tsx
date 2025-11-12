@@ -1,9 +1,9 @@
 import './App.css';
-import PdfEditor from './components/PdfEditor';
+import AdvancedPdfEditor from './components/AdvancedPdfEditor';
 
 function App() {
   return (
-    <PdfEditor />
+    <AdvancedPdfEditor />
   );
 }
 

@@ -1,6 +1,6 @@
 {
-  "name": "Tailwind_configured_React_Template",
-  "description": "A React template with Tailwind CSS configured, using Vite as the build tool.",
+  "name": "pdfmatrix-advanced-editor",
+  "description": "Advanced PDF editor with text extraction and professional quality output.",
   "private": true,
   "version": "0.0.0",
   "type": "module",

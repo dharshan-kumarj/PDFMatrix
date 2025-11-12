@@ -1,6 +1,6 @@
 {
-  "name": "Tailwind_configured_React_Template",
-  "description": "A React template with Tailwind CSS configured, using Vite as the build tool.",
+  "name": "PDFMatrix",
+  "description": "About A privacy-first, client-side PDF editor that runs entirely in your browser. Merge, split, rotate, convert, and enhance PDFs without uploading to any server.",
   "private": true,
   "version": "0.0.0",
   "type": "module",

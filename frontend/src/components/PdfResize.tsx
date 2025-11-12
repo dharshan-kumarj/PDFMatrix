@@ -294,7 +294,7 @@ const PdfResize: React.FC = () => {
       <div className="max-w-4xl mx-auto">
         <div className="bg-white rounded-2xl shadow-xl p-8">
           <div className="text-center mb-8">
-            <h1 className="text-4xl font-bold text-gray-100 mb-2">
+            <h1 className="text-4xl font-bold text-white mb-2">
               📐 Resize PDF Pages
             </h1>
             <p className="text-gray-300">
@@ -321,7 +321,7 @@ const PdfResize: React.FC = () => {
                 rounded-xl p-4 hover:border-violet-400 transition-colors"
             />
             {pdfFile && (
-              <div className="mt-3 text-sm bg-violet-50 p-4 rounded-xl space-y-2">
+              <div className="mt-3 text-sm bg-green-500/20 p-4 rounded-xl space-y-2">
                 <p className="text-gray-300">
                   ✓ Selected: <span className="font-semibold">{pdfFile.name}</span>
                 </p>
@@ -337,7 +337,7 @@ const PdfResize: React.FC = () => {
 
           {/* Target Page Size */}
           <div className="mb-8 bg-gradient-to-r from-violet-50 to-purple-50 rounded-xl p-6 border-2 border-violet-200">
-            <h3 className="text-lg font-semibold text-gray-100 mb-4 flex items-center gap-2">
+            <h3 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
               <span>📏</span> Target Page Size
             </h3>
 
@@ -443,7 +443,7 @@ const PdfResize: React.FC = () => {
 
           {/* Fit Mode */}
           <div className="mb-8 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl p-6 border-2 border-blue-200">
-            <h3 className="text-lg font-semibold text-gray-100 mb-4 flex items-center gap-2">
+            <h3 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
               <span>🎯</span> Content Fitting Mode
             </h3>
 
@@ -508,7 +508,7 @@ const PdfResize: React.FC = () => {
           <div className="mb-8 bg-gradient-to-r from-orange-50 to-red-50 rounded-xl p-6 border-2 border-orange-200">
             <div className="flex items-start justify-between mb-4">
               <div>
-                <h3 className="text-lg font-semibold text-gray-100 flex items-center gap-2">
+                <h3 className="text-lg font-semibold text-white flex items-center gap-2">
                   <span>✂️</span> Crop Margins
                 </h3>
                 <p className="text-sm text-gray-300 mt-1">
@@ -627,7 +627,7 @@ const PdfResize: React.FC = () => {
             className={`w-full py-4 px-6 rounded-xl font-bold text-lg shadow-lg transition-all ${
               !pdfFile || loading
                 ? 'bg-gray-300 text-gray-400 cursor-not-allowed'
-                : 'bg-gradient-to-r from-violet-500 to-purple-600 text-white hover:from-violet-600 hover:to-purple-700 transform hover:scale-[1.02]'
+                : 'bg-gradient-to-r from-green-500 to-emerald-600 text-black font-bold hover:from-green-400 hover:to-emerald-500 transform hover:scale-[1.02]'
             }`}
           >
             {loading ? (

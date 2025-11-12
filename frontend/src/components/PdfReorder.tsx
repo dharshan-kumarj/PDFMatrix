@@ -308,7 +308,7 @@ const PdfReorder: React.FC = () => {
       <div className="max-w-7xl mx-auto">
         <div className="bg-white rounded-2xl shadow-xl p-8">
           <div className="text-center mb-8">
-            <h1 className="text-4xl font-bold text-gray-100 mb-2">
+            <h1 className="text-4xl font-bold text-white mb-2">
               🔄 Reorder PDF Pages
             </h1>
             <p className="text-gray-300">
@@ -335,7 +335,7 @@ const PdfReorder: React.FC = () => {
                 rounded-xl p-4 hover:border-indigo-400 transition-colors"
             />
             {pdfFile && (
-              <p className="mt-3 text-sm text-gray-300 bg-indigo-50 p-3 rounded-xl">
+              <p className="mt-3 text-sm text-gray-300 bg-green-500/20 p-3 rounded-xl">
                 ✓ Selected: <span className="font-semibold">{pdfFile.name}</span>
                 {' - '}
                 <span className="font-semibold">{pages.length} pages</span>
@@ -346,7 +346,7 @@ const PdfReorder: React.FC = () => {
           {/* Loading State */}
           {loading && (
             <div className="text-center py-12">
-              <div className="inline-block animate-spin rounded-full h-16 w-16 border-4 border-indigo-500 border-t-transparent"></div>
+              <div className="inline-block animate-spin rounded-full h-16 w-16 border-4 border-green-500 border-t-transparent"></div>
               <p className="mt-4 text-gray-300 font-semibold">Loading pages and generating thumbnails...</p>
             </div>
           )}
@@ -396,7 +396,7 @@ const PdfReorder: React.FC = () => {
                     className={`px-6 py-2 rounded-xl font-bold transition-colors ${
                       generating
                         ? 'bg-gray-300 text-gray-400 cursor-not-allowed'
-                        : 'bg-gradient-to-r from-indigo-500 to-blue-600 text-white hover:from-indigo-600 hover:to-blue-700'
+                        : 'bg-gradient-to-r from-green-500 to-emerald-600 text-black font-bold hover:from-green-400 hover:to-emerald-500'
                     }`}
                   >
                     {generating ? '⏳ Generating...' : '💾 Save Reordered PDF'}
@@ -456,7 +456,7 @@ const PdfReorder: React.FC = () => {
                         className={`p-2 rounded-xl text-sm font-semibold transition-colors ${
                           index === 0
                             ? 'bg-gray-200 text-gray-400 cursor-not-allowed'
-                            : 'bg-blue-500 text-white hover:bg-gradient-to-r from-green-500 to-emerald-600'
+                            : 'bg-green-500 text-black hover:bg-gradient-to-r from-green-500 to-emerald-600'
                         }`}
                         title="Move Up"
                       >
@@ -468,7 +468,7 @@ const PdfReorder: React.FC = () => {
                         className={`p-2 rounded-xl text-sm font-semibold transition-colors ${
                           index === pages.length - 1
                             ? 'bg-gray-200 text-gray-400 cursor-not-allowed'
-                            : 'bg-blue-500 text-white hover:bg-gradient-to-r from-green-500 to-emerald-600'
+                            : 'bg-green-500 text-black hover:bg-gradient-to-r from-green-500 to-emerald-600'
                         }`}
                         title="Move Down"
                       >
@@ -478,7 +478,7 @@ const PdfReorder: React.FC = () => {
                     <div className="grid grid-cols-2 gap-2">
                       <button
                         onClick={() => duplicatePage(page.id)}
-                        className="p-2 rounded-xl text-sm font-semibold bg-green-500 text-white hover:bg-gradient-to-r from-green-500 to-emerald-600 transition-colors"
+                        className="p-2 rounded-xl text-sm font-semibold bg-green-500 text-black hover:bg-gradient-to-r from-green-500 to-emerald-600 transition-colors"
                         title="Duplicate"
                       >
                         📋

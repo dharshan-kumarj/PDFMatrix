@@ -282,7 +282,7 @@ const ImagesToPdf: React.FC = () => {
           {imageFiles.length > 0 && (
             <>
               <div className="mb-6 p-6 bg-gradient-to-r from-gray-800 to-gray-900 rounded-xl border border-green-500/20">
-                <h3 className="text-lg font-semibold text-gray-100 mb-4">PDF Settings</h3>
+                <h3 className="text-lg font-semibold text-white mb-4">PDF Settings</h3>
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                   {/* Page Size */}
@@ -340,7 +340,7 @@ const ImagesToPdf: React.FC = () => {
               {/* Images List */}
               <div className="mb-6">
                 <div className="flex justify-between items-center mb-3">
-                  <h3 className="text-lg font-semibold text-gray-100">
+                  <h3 className="text-lg font-semibold text-white">
                     Images ({imageFiles.length})
                   </h3>
                   <button
@@ -369,7 +369,7 @@ const ImagesToPdf: React.FC = () => {
                           alt={image.name}
                           className="w-full h-48 object-contain"
                         />
-                        <div className="absolute top-2 left-2 bg-pink-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold text-sm">
+                        <div className="absolute top-2 left-2 bg-green-500/200 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold text-sm">
                           {index + 1}
                         </div>
                       </div>
@@ -386,14 +386,14 @@ const ImagesToPdf: React.FC = () => {
                           <button
                             onClick={() => moveImageUp(index)}
                             disabled={index === 0}
-                            className="flex-1 px-2 py-1 bg-gray-600 text-white rounded text-xs hover:bg-gray-700 disabled:opacity-30 disabled:cursor-not-allowed"
+                            className="flex-1 px-2 py-1 bg-gray-700 text-gray-100 rounded text-xs hover:bg-gray-600 disabled:opacity-30 disabled:cursor-not-allowed"
                           >
                             ▲
                           </button>
                           <button
                             onClick={() => moveImageDown(index)}
                             disabled={index === imageFiles.length - 1}
-                            className="flex-1 px-2 py-1 bg-gray-600 text-white rounded text-xs hover:bg-gray-700 disabled:opacity-30 disabled:cursor-not-allowed"
+                            className="flex-1 px-2 py-1 bg-gray-700 text-gray-100 rounded text-xs hover:bg-gray-600 disabled:opacity-30 disabled:cursor-not-allowed"
                           >
                             ▼
                           </button>

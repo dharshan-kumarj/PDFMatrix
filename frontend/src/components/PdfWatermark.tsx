@@ -407,7 +407,7 @@ const PdfWatermark: React.FC = () => {
       <div className="max-w-4xl mx-auto">
         <div className="bg-white rounded-2xl shadow-xl p-8">
           <div className="text-center mb-8">
-            <h1 className="text-4xl font-bold text-gray-100 mb-2">
+            <h1 className="text-4xl font-bold text-white mb-2">
               💧 PDF Watermark
             </h1>
             <p className="text-gray-300">
@@ -434,7 +434,7 @@ const PdfWatermark: React.FC = () => {
                 rounded-xl p-4 hover:border-teal-400 transition-colors"
             />
             {pdfFile && (
-              <p className="mt-3 text-sm text-gray-300 bg-teal-50 p-3 rounded-xl">
+              <p className="mt-3 text-sm text-gray-300 bg-green-500/20 p-3 rounded-xl">
                 ✓ Selected: <span className="font-semibold">{pdfFile.name}</span>
               </p>
             )}
@@ -450,7 +450,7 @@ const PdfWatermark: React.FC = () => {
                 onClick={() => setWatermarkType('text')}
                 className={`flex-1 py-4 px-6 rounded-xl font-semibold transition-all ${
                   watermarkType === 'text'
-                    ? 'bg-gradient-to-r from-teal-500 to-cyan-600 text-white shadow-lg'
+                    ? 'bg-gradient-to-r from-green-500 to-emerald-600 text-black font-bold shadow-lg'
                     : 'bg-gray-800/50 text-green-400 hover:bg-gray-200'
                 }`}
               >
@@ -460,7 +460,7 @@ const PdfWatermark: React.FC = () => {
                 onClick={() => setWatermarkType('image')}
                 className={`flex-1 py-4 px-6 rounded-xl font-semibold transition-all ${
                   watermarkType === 'image'
-                    ? 'bg-gradient-to-r from-teal-500 to-cyan-600 text-white shadow-lg'
+                    ? 'bg-gradient-to-r from-green-500 to-emerald-600 text-black font-bold shadow-lg'
                     : 'bg-gray-800/50 text-green-400 hover:bg-gray-200'
                 }`}
               >
@@ -473,7 +473,7 @@ const PdfWatermark: React.FC = () => {
           {watermarkType === 'text' && (
             <div className="space-y-6 mb-8">
               <div className="bg-gradient-to-r from-teal-50 to-cyan-50 rounded-xl p-6 border-2 border-teal-200">
-                <h3 className="text-lg font-semibold text-gray-100 mb-4">
+                <h3 className="text-lg font-semibold text-white mb-4">
                   📝 Text Watermark Settings
                 </h3>
 
@@ -620,7 +620,7 @@ const PdfWatermark: React.FC = () => {
           {watermarkType === 'image' && (
             <div className="space-y-6 mb-8">
               <div className="bg-gradient-to-r from-teal-50 to-cyan-50 rounded-xl p-6 border-2 border-teal-200">
-                <h3 className="text-lg font-semibold text-gray-100 mb-4">
+                <h3 className="text-lg font-semibold text-white mb-4">
                   🖼️ Image Watermark Settings
                 </h3>
 
@@ -643,7 +643,7 @@ const PdfWatermark: React.FC = () => {
                       rounded-xl p-4 hover:border-teal-400 transition-colors"
                   />
                   {watermarkImage && (
-                    <p className="mt-3 text-sm text-gray-300 bg-teal-50 p-3 rounded-xl">
+                    <p className="mt-3 text-sm text-gray-300 bg-green-500/20 p-3 rounded-xl">
                       ✓ Selected: <span className="font-semibold">{watermarkImage.name}</span>
                     </p>
                   )}
@@ -758,7 +758,7 @@ const PdfWatermark: React.FC = () => {
             className={`w-full py-4 px-6 rounded-xl font-bold text-lg shadow-lg transition-all ${
               !pdfFile || loading || (watermarkType === 'image' && !watermarkImage)
                 ? 'bg-gray-300 text-gray-400 cursor-not-allowed'
-                : 'bg-gradient-to-r from-teal-500 to-cyan-600 text-white hover:from-teal-600 hover:to-cyan-700 transform hover:scale-[1.02]'
+                : 'bg-gradient-to-r from-green-500 to-emerald-600 text-black font-bold hover:from-green-400 hover:to-emerald-500 transform hover:scale-[1.02]'
             }`}
           >
             {loading ? (

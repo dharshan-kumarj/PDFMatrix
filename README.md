@@ -3,29 +3,66 @@
 
 **PDFmatrix** is a free, browser-based tool for seamless PDF editing, merging, and file conversion—built for students and professionals who want full control with no credit or usage limits.
 
-## Features
+🚀 Features
+✅ Implemented
+Core PDF Operations
 
-- **Upload PDF Files**  
-  Easily upload single or multiple PDF files using a drag-and-drop interface.
+PDF Upload & Edit - Load PDFs directly in the browser and make modifications
+PDF Merging - Combine multiple PDFs into a single document
 
-- **Edit PDF Text Content in the Browser**  
-  Modify, add, or delete text directly inside your PDF files with a real-time visual editor—no downloads required.
+Merge 2 PDFs
+Merge 3+ PDFs simultaneously
 
-- **Merge Multiple PDF Files**  
-  Combine several PDF documents into a single, organized file within seconds.
 
-- **Word to PDF Conversion**  
-  Convert your Word documents (`.docx`) into high-quality PDFs instantly and securely.
+PDF Splitting - Extract specific pages or split into multiple documents
+PDF Rotation - Rotate pages 90°, 180°, or 270°
+Format Conversion
 
-- **PDF to Word Conversion**  
-  Export your PDF files back to editable Word format with just one click.
+PDF to Images - Export individual pages as image files
+Images to PDF - Convert image collections into PDF documents
 
-## Why PDFmatrix?
 
-- 100% client-side for privacy—your files never leave your device
-- No usage caps, credit limits, or watermarks
-- Student-friendly and open-source ethos
+Page Enhancements
 
-***
+Add Page Numbers - Automatically number pages with customizable formatting
+Add Watermark - Apply text or image watermarks to protect your documents
 
-Feel free to adjust the wording to match your personal style or add setup instructions when you’re ready!
+
+
+🔨 In Progress
+
+PDF Password Protection - Encrypt PDFs with password security
+Resize PDF Pages - Adjust page dimensions and scaling
+
+Change page size (A4 → Letter, etc.)
+Fit content to page
+Crop margins
+
+
+Reorder Pages - Interactive page management
+
+Drag-and-drop page thumbnails
+Move, delete, or duplicate pages
+Visual page preview
+
+
+
+🛠️ Technology Stack
+
+PDF Processing: pdf-lib - Core PDF manipulation
+PDF Rendering: pdfjs-dist - Page preview and rendering
+Client-Side Only - Zero server dependency, complete privacy
+
+🎯 Key Advantages
+
+100% Client-Side - All operations run locally in your browser
+Privacy First - Your documents never leave your device
+No Upload Limits - Process files of any size without server restrictions
+Offline Capable - Works without internet connection (after initial load)
+
+📋 Roadmap
+See the feature list above for planned enhancements. Contributions welcome!
+📄 License
+MIT License - Free to use, modify, and distribute
+🤝 Contributing
+This is a prototype in active development. Feature requests and pull requests are welcome!

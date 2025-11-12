@@ -8,6 +8,7 @@ import PdfToImages from './components/PdfToImages';
 import ImagesToPdf from './components/ImagesToPdf';
 import PdfPageNumbers from './components/PdfPageNumbers';
 import PdfWatermark from './components/PdfWatermark';
+// import PdfPasswordProtection from './components/PdfPasswordProtection'; // TODO: Implement with backend for real encryption
 
 function App() {
   const [activeTab, setActiveTab] = useState<'merger' | 'splitter' | 'compressor' | 'rotation' | 'pdfToImages' | 'imagesToPdf' | 'pageNumbers' | 'watermark'>('merger');
@@ -98,6 +99,17 @@ function App() {
             >
               💧 Watermark
             </button>
+            {/* TODO: Add Password Protection when backend encryption is implemented */}
+            {/* <button
+              onClick={() => setActiveTab('password')}
+              className={`px-6 py-4 font-semibold transition-colors border-b-2 ${
+                activeTab === 'password'
+                  ? 'text-red-600 border-red-600'
+                  : 'text-gray-500 border-transparent hover:text-gray-700'
+              }`}
+            >
+              🔒 Password
+            </button> */}
           </div>
         </div>
       </div>
@@ -111,6 +123,7 @@ function App() {
       {activeTab === 'imagesToPdf' && <ImagesToPdf />}
       {activeTab === 'pageNumbers' && <PdfPageNumbers />}
       {activeTab === 'watermark' && <PdfWatermark />}
+      {/* {activeTab === 'password' && <PdfPasswordProtection />} */}
     </div>
   );
 }

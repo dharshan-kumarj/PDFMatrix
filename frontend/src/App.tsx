@@ -4,9 +4,11 @@ import PdfMerger from './components/PdfMerger';
 import PdfSplitter from './components/PdfSplitter';
 import PdfCompressor from './components/PdfCompressor';
 import PdfRotation from './components/PdfRotation';
+import PdfToImages from './components/PdfToImages';
+import ImagesToPdf from './components/ImagesToPdf';
 
 function App() {
-  const [activeTab, setActiveTab] = useState<'merger' | 'splitter' | 'compressor' | 'rotation'>('merger');
+  const [activeTab, setActiveTab] = useState<'merger' | 'splitter' | 'compressor' | 'rotation' | 'pdfToImages' | 'imagesToPdf'>('merger');
 
   return (
     <div>
@@ -54,6 +56,26 @@ function App() {
             >
               🔄 PDF Rotation
             </button>
+            <button
+              onClick={() => setActiveTab('pdfToImages')}
+              className={`px-6 py-4 font-semibold transition-colors border-b-2 ${
+                activeTab === 'pdfToImages'
+                  ? 'text-pink-600 border-pink-600'
+                  : 'text-gray-500 border-transparent hover:text-gray-700'
+              }`}
+            >
+              📄→🖼️ PDF to Images
+            </button>
+            <button
+              onClick={() => setActiveTab('imagesToPdf')}
+              className={`px-6 py-4 font-semibold transition-colors border-b-2 ${
+                activeTab === 'imagesToPdf'
+                  ? 'text-indigo-600 border-indigo-600'
+                  : 'text-gray-500 border-transparent hover:text-gray-700'
+              }`}
+            >
+              🖼️→📄 Images to PDF
+            </button>
           </div>
         </div>
       </div>
@@ -63,6 +85,8 @@ function App() {
       {activeTab === 'splitter' && <PdfSplitter />}
       {activeTab === 'compressor' && <PdfCompressor />}
       {activeTab === 'rotation' && <PdfRotation />}
+      {activeTab === 'pdfToImages' && <PdfToImages />}
+      {activeTab === 'imagesToPdf' && <ImagesToPdf />}
     </div>
   );
 }

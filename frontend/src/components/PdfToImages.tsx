@@ -241,7 +241,7 @@ const PdfToImages: React.FC = () => {
           {pdfFile && (
             <>
               <div className="mb-6 p-6 bg-gradient-to-r from-gray-800 to-gray-900 rounded-xl border border-green-500/20">
-                <h3 className="text-lg font-semibold text-gray-100 mb-4">Conversion Settings</h3>
+                <h3 className="text-lg font-semibold text-white mb-4">Conversion Settings</h3>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   {/* Image Format */}
@@ -382,7 +382,7 @@ const PdfToImages: React.FC = () => {
               {convertedImages.length > 0 && (
                 <div>
                   <div className="flex justify-between items-center mb-4">
-                    <h3 className="text-lg font-semibold text-gray-100">
+                    <h3 className="text-lg font-semibold text-white">
                       Converted Images ({convertedImages.length})
                     </h3>
                     <div className="flex gap-2">

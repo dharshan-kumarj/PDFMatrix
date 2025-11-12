@@ -105,15 +105,16 @@ const PdfMerger: React.FC = () => {
 
       // Save the merged PDF
       const mergedPdfBytes = await mergedPdf.save();
-      
+
       // Create a blob and download
-      const blob = new Blob([mergedPdfBytes], { type: 'application/pdf' });
+      const arrayBuffer = new Uint8Array(mergedPdfBytes).buffer;
+      const blob = new Blob([arrayBuffer], { type: 'application/pdf' });
       const url = URL.createObjectURL(blob);
       const link = document.createElement('a');
       link.href = url;
       link.download = 'merged-document.pdf';
       link.click();
-      
+
       // Clean up
       setTimeout(() => URL.revokeObjectURL(url), 100);
       

@@ -173,7 +173,7 @@ const PdfPageNumbers: React.FC = () => {
       <div className="max-w-4xl mx-auto">
         <div className="bg-white rounded-2xl shadow-xl p-8">
           <div className="text-center mb-8">
-            <h1 className="text-4xl font-bold text-gray-100 mb-2">
+            <h1 className="text-4xl font-bold text-white mb-2">
               🔢 PDF Page Numbers
             </h1>
             <p className="text-gray-300">
@@ -202,7 +202,7 @@ const PdfPageNumbers: React.FC = () => {
               />
             </div>
             {pdfFile && (
-              <p className="mt-3 text-sm text-gray-300 bg-cyan-50 p-3 rounded-xl">
+              <p className="mt-3 text-sm text-gray-300 bg-green-500/20 p-3 rounded-xl">
                 ✓ Selected: <span className="font-semibold">{pdfFile.name}</span>
               </p>
             )}
@@ -423,7 +423,7 @@ const PdfPageNumbers: React.FC = () => {
             className={`w-full py-4 px-6 rounded-xl font-bold text-lg shadow-lg transition-all ${
               !pdfFile || loading
                 ? 'bg-gray-300 text-gray-400 cursor-not-allowed'
-                : 'bg-gradient-to-r from-cyan-500 to-blue-600 text-white hover:from-cyan-600 hover:to-blue-700 transform hover:scale-[1.02]'
+                : 'bg-gradient-to-r from-green-500 to-emerald-600 text-black font-bold hover:from-green-400 hover:to-emerald-500 transform hover:scale-[1.02]'
             }`}
           >
             {loading ? (

@@ -164,12 +164,6 @@ function App() {
                 </div>
               </div>
             </div>
-
-            {/* Status Indicator */}
-            <div className="hidden md:flex items-center gap-2 px-4 py-2 bg-gray-900 rounded-lg border border-green-500/20">
-              <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
-              <span className="text-xs text-gray-400">Ready</span>
-            </div>
           </div>
         </header>
 

@@ -217,7 +217,10 @@ const PdfRotation: React.FC = () => {
     <div className="min-h-screen bg-transparent p-4 sm:p-6 lg:p-8">
       <div className="max-w-7xl mx-auto">
         <div className="bg-gradient-to-br from-gray-900 to-black rounded-2xl shadow-2xl border border-green-500/20 p-6 sm:p-8">
-          <h1 className="text-3xl font-bold bg-gradient-to-r from-green-400 to-emerald-400 bg-clip-text text-transparent mb-2">🔄 PDF Rotation</h1>
+          <h1 className="text-3xl font-bold mb-2">
+            <span className="text-3xl mr-2">🔄</span>
+            <span className="bg-gradient-to-r from-green-400 to-emerald-400 bg-clip-text text-transparent">PDF Rotation</span>
+          </h1>
 
           {/* File Upload Section */}
           <div className="mb-6">

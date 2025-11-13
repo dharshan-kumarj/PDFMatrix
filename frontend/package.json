@@ -6,9 +6,10 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "build": "node copy-pdfjs-worker.js && tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "postinstall": "node copy-pdfjs-worker.js"
   },
   "dependencies": {
     "jszip": "^3.10.1",

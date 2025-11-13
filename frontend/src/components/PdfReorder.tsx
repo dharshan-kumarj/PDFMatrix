@@ -1,12 +1,10 @@
 import React, { useState, useRef } from 'react';
 import { PDFDocument } from 'pdf-lib';
 import * as pdfjsLib from 'pdfjs-dist';
+import pdfjsWorker from 'pdfjs-dist/build/pdf.worker.min.mjs?url';
 
-// Configure PDF.js worker - using local worker from node_modules
-pdfjsLib.GlobalWorkerOptions.workerSrc = new URL(
-  'pdfjs-dist/build/pdf.worker.min.mjs',
-  import.meta.url
-).toString();
+// Configure PDF.js worker
+pdfjsLib.GlobalWorkerOptions.workerSrc = pdfjsWorker;
 
 interface PageInfo {
   id: string;

@@ -8,7 +8,12 @@ export default defineConfig({
     VitePWA({
       registerType: 'prompt',
       injectRegister: 'auto',
-      includeAssets: ['favicon.ico', 'apple-touch-icon.png', 'favicon-96x96.png'],
+      includeAssets: [
+        'favicon.ico',
+        'apple-touch-icon.png',
+        'favicon-96x96.png',
+        'pdf.worker.min.mjs' // Include PDF.js worker for offline support
+      ],
       manifest: {
         name: 'PDFMatrix - Free PDF Tools',
         short_name: 'PDFMatrix',
@@ -33,9 +38,11 @@ export default defineConfig({
         ]
       },
       workbox: {
-        globPatterns: ['**/*.{js,css,html,ico,png,woff,woff2}'],
+        globPatterns: ['**/*.{js,mjs,css,html,ico,png,woff,woff2,wasm}'],
         globIgnores: ['**/*.svg', '**/*Zone.Identifier'],
-        maximumFileSizeToCacheInBytes: 3 * 1024 * 1024,
+        maximumFileSizeToCacheInBytes: 5 * 1024 * 1024, // Increased to 5MB for PDF.js worker
+        // Don't use import strategy, use regular module loading
+        navigateFallback: null,
         runtimeCaching: [
           {
             urlPattern: /^https:\/\/fonts\.googleapis\.com\/.*/i,
@@ -75,6 +82,7 @@ export default defineConfig({
   build: {
     target: 'esnext',
     minify: 'terser',
+    assetsInlineLimit: 0, // Don't inline any assets, keep them as separate files for proper caching
     terserOptions: {
       compress: {
         drop_console: true,

@@ -1,10 +1,6 @@
 import React, { useState } from 'react';
-import * as pdfjsLib from 'pdfjs-dist';
-import pdfjsWorker from 'pdfjs-dist/build/pdf.worker.min.mjs?url';
+import { pdfjsLib } from '../utils/pdfWorker';
 import JSZip from 'jszip';
-
-// Configure PDF.js worker
-pdfjsLib.GlobalWorkerOptions.workerSrc = pdfjsWorker;
 
 interface ConvertedImage {
   pageNumber: number;

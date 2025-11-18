@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { PDFDocument, PDFPage } from 'pdf-lib';
+import PdfQualitySelector, { PdfQualitySettings, DEFAULT_QUALITY_PRESETS } from './PdfQualitySelector';
 
 type PageSize = 'A4' | 'Letter' | 'Legal' | 'A3' | 'A5' | 'Tabloid' | 'Custom';
 type FitMode = 'fit' | 'fill' | 'stretch' | 'none';
@@ -32,6 +33,12 @@ const PdfResize: React.FC = () => {
   // Apply to specific pages
   const [applyToAllPages, setApplyToAllPages] = useState(true);
   const [specificPages, setSpecificPages] = useState('');
+
+  const [isResizing, setIsResizing] = useState(false);
+  const [qualitySettings, setQualitySettings] = useState<PdfQualitySettings>({
+    level: 'medium',
+    ...DEFAULT_QUALITY_PRESETS.medium,
+  });
 
   // Page size presets in points (1 inch = 72 points)
   const pageSizes: Record<PageSize, PageDimensions> = {
@@ -219,6 +226,7 @@ const PdfResize: React.FC = () => {
       return;
     }
 
+    setIsResizing(true);
     setLoading(true);
     console.log('Resizing PDF pages...');
 
@@ -287,6 +295,7 @@ const PdfResize: React.FC = () => {
       console.error('Error resizing PDF:', error);
       alert('Failed to resize PDF. Please try again.');
     } finally {
+      setIsResizing(false);
       setLoading(false);
     }
   };
@@ -622,17 +631,35 @@ const PdfResize: React.FC = () => {
             </div>
           </div>
 
+          {/* Quality Settings */}
+          {pdfFile && (
+            <PdfQualitySelector
+              qualitySettings={qualitySettings}
+              onChange={setQualitySettings}
+              className="mb-6"
+            />
+          )}
+
           {/* Resize Button */}
+
           <button
+
             onClick={resizePdf}
-            disabled={!pdfFile || loading}
+
+            disabled={!pdfFile || isResizing}
+
             className={`w-full py-4 px-6 rounded-xl font-bold text-lg shadow-lg transition-all ${
-              !pdfFile || loading
+
+              !pdfFile || loading || isResizing
+
                 ? 'bg-gray-700 text-gray-500 cursor-not-allowed'
+
                 : 'bg-gradient-to-r from-green-500 to-emerald-600 text-black hover:from-green-400 hover:to-emerald-500 transform hover:scale-[1.02] shadow-green-500/30'
+
             }`}
+
           >
-            {loading ? (
+            {(loading || isResizing) ? (
               <span className="flex items-center justify-center gap-3">
                 <svg className="animate-spin h-6 w-6" viewBox="0 0 24 24">
                   <circle

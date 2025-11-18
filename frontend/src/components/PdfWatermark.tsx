@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { PDFDocument, rgb, degrees, StandardFonts } from 'pdf-lib';
+import PdfQualitySelector, { PdfQualitySettings, DEFAULT_QUALITY_PRESETS } from './PdfQualitySelector';
 
 type WatermarkType = 'text' | 'image';
 type Position = 'center' | 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right' | 'diagonal' | 'tile';
@@ -8,6 +9,10 @@ const PdfWatermark: React.FC = () => {
   const [pdfFile, setPdfFile] = useState<File | null>(null);
   const [watermarkType, setWatermarkType] = useState<WatermarkType>('text');
   const [loading, setLoading] = useState(false);
+  const [qualitySettings, setQualitySettings] = useState<PdfQualitySettings>({
+    level: 'medium',
+    ...DEFAULT_QUALITY_PRESETS.medium,
+  });
 
   // Text watermark settings
   const [watermarkText, setWatermarkText] = useState('CONFIDENTIAL');
@@ -260,8 +265,10 @@ const PdfWatermark: React.FC = () => {
         }
       }
 
-      // Save the watermarked PDF
-      const pdfBytes = await pdfDoc.save();
+      // Save the watermarked PDF with compression settings
+      const pdfBytes = await pdfDoc.save({
+        useObjectStreams: qualitySettings.useObjectStreams,
+      });
       const blob = new Blob([new Uint8Array(pdfBytes)], { type: 'application/pdf' });
       const url = URL.createObjectURL(blob);
 
@@ -374,8 +381,10 @@ const PdfWatermark: React.FC = () => {
         }
       }
 
-      // Save the watermarked PDF
-      const pdfBytes = await pdfDoc.save();
+      // Save the watermarked PDF with compression settings
+      const pdfBytes = await pdfDoc.save({
+        useObjectStreams: qualitySettings.useObjectStreams,
+      });
       const blob = new Blob([new Uint8Array(pdfBytes)], { type: 'application/pdf' });
       const url = URL.createObjectURL(blob);
 
@@ -713,6 +722,15 @@ const PdfWatermark: React.FC = () => {
                 </div>
               </div>
             </div>
+          )}
+
+          {/* Quality Settings */}
+          {pdfFile && (
+            <PdfQualitySelector
+              qualitySettings={qualitySettings}
+              onChange={setQualitySettings}
+              className="mb-8"
+            />
           )}
 
           {/* Page Selection */}

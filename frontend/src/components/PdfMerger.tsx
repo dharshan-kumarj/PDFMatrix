@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { PDFDocument } from 'pdf-lib';
+import PdfQualitySelector, { PdfQualitySettings, DEFAULT_QUALITY_PRESETS } from './PdfQualitySelector';
 
 interface PdfFile {
   id: string;
@@ -11,6 +12,10 @@ const PdfMerger: React.FC = () => {
   const [pdfFiles, setPdfFiles] = useState<PdfFile[]>([]);
   const [isMerging, setIsMerging] = useState(false);
   const [draggedIndex, setDraggedIndex] = useState<number | null>(null);
+  const [qualitySettings, setQualitySettings] = useState<PdfQualitySettings>({
+    level: 'medium',
+    ...DEFAULT_QUALITY_PRESETS.medium,
+  });
 
   // Handle file selection
   const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -103,8 +108,10 @@ const PdfMerger: React.FC = () => {
         }
       }
 
-      // Save the merged PDF
-      const mergedPdfBytes = await mergedPdf.save();
+      // Save the merged PDF with compression settings
+      const mergedPdfBytes = await mergedPdf.save({
+        useObjectStreams: qualitySettings.useObjectStreams,
+      });
 
       // Create a blob and download
       const arrayBuffer = new Uint8Array(mergedPdfBytes).buffer;
@@ -268,6 +275,15 @@ const PdfMerger: React.FC = () => {
                 Tip: Drag and drop to reorder, or use ▲ ▼ buttons
               </p>
             </div>
+          )}
+
+          {/* Quality Settings */}
+          {pdfFiles.length > 0 && (
+            <PdfQualitySelector
+              qualitySettings={qualitySettings}
+              onChange={setQualitySettings}
+              className="mb-6"
+            />
           )}
 
           {/* Merge Button */}

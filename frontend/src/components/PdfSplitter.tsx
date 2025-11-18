@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { PDFDocument } from 'pdf-lib';
+import PdfQualitySelector, { PdfQualitySettings, DEFAULT_QUALITY_PRESETS } from './PdfQualitySelector';
 
 type SplitMode = 'byRange' | 'byPages' | 'extractPages';
 
@@ -18,6 +19,10 @@ const PdfSplitter: React.FC = () => {
   const [splitMode, setSplitMode] = useState<SplitMode>('byRange');
   const [_isLoading, setIsLoading] = useState(false);
   const [isSplitting, setIsSplitting] = useState(false);
+  const [qualitySettings, setQualitySettings] = useState<PdfQualitySettings>({
+    level: 'medium',
+    ...DEFAULT_QUALITY_PRESETS.medium,
+  });
 
   // For 'byRange' mode - multiple custom ranges
   const [splitRanges, setSplitRanges] = useState<SplitRange[]>([]);
@@ -127,8 +132,10 @@ const PdfSplitter: React.FC = () => {
         const copiedPages = await newPdf.copyPages(sourcePdf, pageIndices);
         copiedPages.forEach(page => newPdf.addPage(page));
 
-        // Save and download
-        const pdfBytes = await newPdf.save();
+        // Save and download with compression settings
+        const pdfBytes = await newPdf.save({
+          useObjectStreams: qualitySettings.useObjectStreams,
+        });
         downloadPdf(pdfBytes, `${range.name}.pdf`);
 
         console.log(`Created: ${range.name}.pdf (pages ${range.start}-${range.end})`);
@@ -185,7 +192,9 @@ const PdfSplitter: React.FC = () => {
         const [copiedPage] = await newPdf.copyPages(sourcePdf, [pageNum - 1]);
         newPdf.addPage(copiedPage);
 
-        const pdfBytes = await newPdf.save();
+        const pdfBytes = await newPdf.save({
+          useObjectStreams: qualitySettings.useObjectStreams,
+        });
         downloadPdf(pdfBytes, `page_${pageNum}.pdf`);
       }
 
@@ -240,7 +249,9 @@ const PdfSplitter: React.FC = () => {
       const copiedPages = await newPdf.copyPages(sourcePdf, pageIndices);
       copiedPages.forEach(page => newPdf.addPage(page));
 
-      const pdfBytes = await newPdf.save();
+      const pdfBytes = await newPdf.save({
+        useObjectStreams: qualitySettings.useObjectStreams,
+      });
       downloadPdf(pdfBytes, `extracted_pages.pdf`);
 
       alert(`Successfully extracted ${uniquePages.length} page(s) into one PDF!`);
@@ -467,6 +478,13 @@ const PdfSplitter: React.FC = () => {
                   </div>
                 )}
               </div>
+
+              {/* Quality Settings */}
+              <PdfQualitySelector
+                qualitySettings={qualitySettings}
+                onChange={setQualitySettings}
+                className="mb-6"
+              />
 
               {/* Split Button */}
               <button

@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react';
 import { PDFDocument } from 'pdf-lib';
 import { pdfjsLib } from '../utils/pdfWorker';
+import PdfQualitySelector, { PdfQualitySettings, DEFAULT_QUALITY_PRESETS } from './PdfQualitySelector';
 
 interface PageInfo {
   id: string;
@@ -18,6 +19,10 @@ const PdfReorder: React.FC = () => {
   const [selectedPages, setSelectedPages] = useState<Set<string>>(new Set());
   const [draggedPage, setDraggedPage] = useState<string | null>(null);
   const pdfFileRef = useRef<File | null>(null);
+  const [qualitySettings, setQualitySettings] = useState<PdfQualitySettings>({
+    level: 'medium',
+    ...DEFAULT_QUALITY_PRESETS.medium,
+  });
 
   const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -344,6 +349,15 @@ const PdfReorder: React.FC = () => {
               <div className="inline-block animate-spin rounded-full h-16 w-16 border-4 border-green-500 border-t-transparent"></div>
               <p className="mt-4 text-gray-300 font-semibold">Loading pages and generating thumbnails...</p>
             </div>
+          )}
+
+          {/* Quality Settings */}
+          {pages.length > 0 && !loading && (
+            <PdfQualitySelector
+              qualitySettings={qualitySettings}
+              onChange={setQualitySettings}
+              className="mb-6"
+            />
           )}
 
           {/* Toolbar */}

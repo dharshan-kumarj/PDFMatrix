@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { PDFDocument, degrees } from 'pdf-lib';
 import { pdfjsLib } from '../utils/pdfWorker';
+import PdfQualitySelector, { PdfQualitySettings, DEFAULT_QUALITY_PRESETS } from './PdfQualitySelector';
 
 interface PageRotation {
   pageNumber: number;
@@ -16,6 +17,10 @@ const PdfRotation: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isRotating, setIsRotating] = useState(false);
   const [selectedPages, setSelectedPages] = useState<Set<number>>(new Set());
+  const [qualitySettings, setQualitySettings] = useState<PdfQualitySettings>({
+    level: 'medium',
+    ...DEFAULT_QUALITY_PRESETS.medium,
+  });
 
   // Handle PDF file selection
   const handleFileSelect = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -187,8 +192,10 @@ const PdfRotation: React.FC = () => {
         }
       });
 
-      // Save rotated PDF
-      const rotatedPdfBytes = await pdfDoc.save();
+      // Save rotated PDF with compression settings
+      const rotatedPdfBytes = await pdfDoc.save({
+        useObjectStreams: qualitySettings.useObjectStreams,
+      });
 
       // Download
       const uint8Array = new Uint8Array(rotatedPdfBytes);
@@ -420,6 +427,13 @@ const PdfRotation: React.FC = () => {
                   ))}
                 </div>
               </div>
+
+              {/* Quality Settings */}
+              <PdfQualitySelector
+                qualitySettings={qualitySettings}
+                onChange={setQualitySettings}
+                className="mb-6"
+              />
 
               {/* Apply Button */}
               <button

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { PDFDocument, PageSizes } from 'pdf-lib';
+import PdfQualitySelector, { PdfQualitySettings, DEFAULT_QUALITY_PRESETS } from './PdfQualitySelector';
 
 interface ImageFile {
   id: string;
@@ -20,6 +21,10 @@ const ImagesToPdf: React.FC = () => {
   const [pageSize, setPageSize] = useState<PageSize>('A4');
   const [imageFit, setImageFit] = useState<ImageFit>('fit');
   const [margin, setMargin] = useState(20);
+  const [qualitySettings, setQualitySettings] = useState<PdfQualitySettings>({
+    level: 'medium',
+    ...DEFAULT_QUALITY_PRESETS.medium,
+  });
 
   // Handle image file selection
   const handleFileSelect = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -140,6 +145,55 @@ const ImagesToPdf: React.FC = () => {
     }
   };
 
+  // Compress and resize image
+  const compressImage = async (
+    dataUrl: string,
+    maxDimension: number,
+    quality: number
+  ): Promise<{ dataUrl: string; width: number; height: number }> => {
+    return new Promise((resolve, reject) => {
+      const img = new Image();
+      img.onload = () => {
+        let { width, height } = img;
+
+        // Resize if needed
+        if (maxDimension > 0 && (width > maxDimension || height > maxDimension)) {
+          if (width > height) {
+            height = (height / width) * maxDimension;
+            width = maxDimension;
+          } else {
+            width = (width / height) * maxDimension;
+            height = maxDimension;
+          }
+        }
+
+        // Create canvas and compress
+        const canvas = document.createElement('canvas');
+        canvas.width = width;
+        canvas.height = height;
+        const ctx = canvas.getContext('2d');
+        
+        if (!ctx) {
+          reject(new Error('Failed to get canvas context'));
+          return;
+        }
+
+        ctx.drawImage(img, 0, 0, width, height);
+        
+        // Convert to JPEG for compression (better than PNG for photos)
+        const compressedDataUrl = canvas.toDataURL('image/jpeg', quality);
+        
+        resolve({
+          dataUrl: compressedDataUrl,
+          width,
+          height,
+        });
+      };
+      img.onerror = reject;
+      img.src = dataUrl;
+    });
+  };
+
   // Convert images to PDF
   const convertImagesToPdf = async () => {
     if (imageFiles.length === 0) {
@@ -150,7 +204,7 @@ const ImagesToPdf: React.FC = () => {
     setIsConverting(true);
 
     try {
-      console.log(`Converting ${imageFiles.length} images to PDF...`);
+      console.log(`Converting ${imageFiles.length} images to PDF with quality: ${qualitySettings.level}...`);
 
       // Create new PDF document
       const pdfDoc = await PDFDocument.create();
@@ -158,16 +212,18 @@ const ImagesToPdf: React.FC = () => {
 
       for (const imageFile of imageFiles) {
         try {
-          // Fetch image
-          const imageBytes = await fetch(imageFile.dataUrl).then(res => res.arrayBuffer());
+          // Compress image based on quality settings
+          const { dataUrl: compressedDataUrl } = await compressImage(
+            imageFile.dataUrl,
+            qualitySettings.imageMaxDimension,
+            qualitySettings.imageQuality
+          );
 
-          // Embed image
-          let image;
-          if (imageFile.file.type === 'image/png') {
-            image = await pdfDoc.embedPng(imageBytes);
-          } else {
-            image = await pdfDoc.embedJpg(imageBytes);
-          }
+          // Fetch compressed image
+          const imageBytes = await fetch(compressedDataUrl).then(res => res.arrayBuffer());
+
+          // Embed image (always as JPEG after compression)
+          const image = await pdfDoc.embedJpg(imageBytes);
 
           // Create page
           const page = pdfDoc.addPage([pageDimensions.width, pageDimensions.height]);
@@ -221,14 +277,16 @@ const ImagesToPdf: React.FC = () => {
             height: imageHeight,
           });
 
-          console.log(`Added ${imageFile.name} to PDF`);
+          console.log(`Added ${imageFile.name} to PDF (compressed)`);
         } catch (error) {
           console.error(`Error adding ${imageFile.name}:`, error);
         }
       }
 
-      // Save PDF
-      const pdfBytes = await pdfDoc.save();
+      // Save PDF with compression settings
+      const pdfBytes = await pdfDoc.save({
+        useObjectStreams: qualitySettings.useObjectStreams,
+      });
 
       // Download PDF
       const uint8Array = new Uint8Array(pdfBytes);
@@ -346,6 +404,13 @@ const ImagesToPdf: React.FC = () => {
                   </div>
                 </div>
               </div>
+
+              {/* Quality Settings */}
+              <PdfQualitySelector
+                qualitySettings={qualitySettings}
+                onChange={setQualitySettings}
+                className="mb-6"
+              />
 
               {/* Images List */}
               <div className="mb-6">

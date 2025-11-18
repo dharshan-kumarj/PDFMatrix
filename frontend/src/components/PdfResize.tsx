@@ -269,8 +269,10 @@ const PdfResize: React.FC = () => {
         console.log(`  - Resized to: ${Math.round(newSize.width)} x ${Math.round(newSize.height)}`);
       }
 
-      // Save the resized PDF
-      const pdfBytes = await pdfDoc.save();
+      // Save with compression settings
+      const pdfBytes = await pdfDoc.save({
+        useObjectStreams: qualitySettings.useObjectStreams,
+      });
       const blob = new Blob([new Uint8Array(pdfBytes)], { type: 'application/pdf' });
       const url = URL.createObjectURL(blob);
 

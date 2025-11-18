@@ -19,6 +19,11 @@ const PdfPageNumbers: React.FC = () => {
   const [textColor, setTextColor] = useState('#000000');
   const [prefix, setPrefix] = useState('');
   const [suffix, setSuffix] = useState('');
+  const [opacity, setOpacity] = useState(0.8);
+  const [qualitySettings, setQualitySettings] = useState<PdfQualitySettings>({
+    level: 'medium',
+    ...DEFAULT_QUALITY_PRESETS.medium,
+  });
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -143,6 +148,7 @@ const PdfPageNumbers: React.FC = () => {
           size: fontSize,
           font,
           color: rgb(color.r, color.g, color.b),
+          opacity: opacity,
         });
 
         console.log(`Added page number to page ${i + 1}: "${text}"`);
@@ -291,6 +297,27 @@ const PdfPageNumbers: React.FC = () => {
               </div>
             </div>
 
+            {/* Opacity */}
+            <div>
+              <label className="block text-sm font-semibold text-green-400 mb-3">
+                💧 Opacity: {Math.round(opacity * 100)}%
+              </label>
+              <input
+                type="range"
+                min="0.3"
+                max="1"
+                step="0.1"
+                value={opacity}
+                onChange={(e) => setOpacity(parseFloat(e.target.value))}
+                className="w-full h-2 bg-gray-700 rounded-xl appearance-none cursor-pointer accent-green-500"
+              />
+              <div className="flex justify-between text-xs text-gray-400 mt-1">
+                <span>30%</span>
+                <span>65%</span>
+                <span>100%</span>
+              </div>
+            </div>
+
             {/* Margin X */}
             <div>
               <label className="block text-sm font-semibold text-green-400 mb-3">
@@ -419,6 +446,15 @@ const PdfPageNumbers: React.FC = () => {
               </p>
             </div>
           </div>
+
+          {/* Quality Settings */}
+          {pdfFile && (
+            <PdfQualitySelector
+              qualitySettings={qualitySettings}
+              onChange={setQualitySettings}
+              className="mb-6"
+            />
+          )}
 
           {/* Add Page Numbers Button */}
           <button

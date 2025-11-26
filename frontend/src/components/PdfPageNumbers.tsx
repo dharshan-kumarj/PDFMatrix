@@ -3,7 +3,7 @@ import { PDFDocument, rgb, StandardFonts } from 'pdf-lib';
 import PdfQualitySelector, { PdfQualitySettings, DEFAULT_QUALITY_PRESETS } from './PdfQualitySelector';
 
 type Position = 'top-left' | 'top-center' | 'top-right' | 'bottom-left' | 'bottom-center' | 'bottom-right';
-type Format = 'number' | 'page-of-total' | 'page-x-of-y';
+type Format = 'number' | 'page-of-total' | 'page-x-of-y' | 'roman' | 'roman-lowercase' | 'roman-page-of-total';
 
 const PdfPageNumbers: React.FC = () => {
   const [pdfFile, setPdfFile] = useState<File | null>(null);
@@ -46,20 +46,63 @@ const PdfPageNumbers: React.FC = () => {
       : { r: 0, g: 0, b: 0 };
   };
 
+  // Convert number to Roman numerals
+  const toRoman = (num: number): string => {
+    const romanNumerals: [number, string][] = [
+      [1000, 'M'],
+      [900, 'CM'],
+      [500, 'D'],
+      [400, 'CD'],
+      [100, 'C'],
+      [90, 'XC'],
+      [50, 'L'],
+      [40, 'XL'],
+      [10, 'X'],
+      [9, 'IX'],
+      [5, 'V'],
+      [4, 'IV'],
+      [1, 'I'],
+    ];
+
+    let result = '';
+    let remaining = num;
+
+    for (const [value, symbol] of romanNumerals) {
+      while (remaining >= value) {
+        result += symbol;
+        remaining -= value;
+      }
+    }
+
+    return result;
+  };
+
   const getPageNumberText = (pageNum: number, totalPages: number): string => {
     let text = '';
     
     if (prefix) text += prefix + ' ';
     
+    const currentNum = pageNum + startNumber - 1;
+    const totalNum = totalPages + startNumber - 1;
+
     switch (format) {
       case 'number':
-        text += (pageNum + startNumber - 1).toString();
+        text += currentNum.toString();
         break;
       case 'page-of-total':
-        text += `Page ${pageNum + startNumber - 1} of ${totalPages + startNumber - 1}`;
+        text += `Page ${currentNum} of ${totalNum}`;
         break;
       case 'page-x-of-y':
-        text += `${pageNum + startNumber - 1} / ${totalPages + startNumber - 1}`;
+        text += `${currentNum} / ${totalNum}`;
+        break;
+      case 'roman':
+        text += toRoman(currentNum);
+        break;
+      case 'roman-lowercase':
+        text += toRoman(currentNum).toLowerCase();
+        break;
+      case 'roman-page-of-total':
+        text += `${toRoman(currentNum)} of ${toRoman(totalNum)}`;
         break;
     }
     
@@ -252,6 +295,9 @@ const PdfPageNumbers: React.FC = () => {
                 <option value="number">Number Only (1, 2, 3...)</option>
                 <option value="page-of-total">Page X of Y</option>
                 <option value="page-x-of-y">X / Y</option>
+                <option value="roman">Roman Numerals (I, II, III...)</option>
+                <option value="roman-lowercase">Roman Lowercase (i, ii, iii...)</option>
+                <option value="roman-page-of-total">Roman X of Y (I of X)</option>
               </select>
             </div>
 

@@ -9,6 +9,7 @@ interface ImageFile {
   dataUrl: string;
   width: number;
   height: number;
+  rotation: number; // in degrees (0, 90, 180, 270)
 }
 
 type PageSize = 'A4' | 'Letter' | 'Legal' | 'A3' | 'A5' | 'Custom';
@@ -51,6 +52,7 @@ const ImagesToPdf: React.FC = () => {
           dataUrl,
           width,
           height,
+          rotation: 0,
         });
       } catch (error) {
         console.error(`Error loading ${file.name}:`, error);
@@ -127,6 +129,21 @@ const ImagesToPdf: React.FC = () => {
     setImageFiles([]);
   };
 
+  // Rotate image
+  const rotateImage = (id: string, degrees: number) => {
+    setImageFiles(prev =>
+      prev.map(img => {
+        if (img.id === id) {
+          return {
+            ...img,
+            rotation: (img.rotation + degrees) % 360,
+          };
+        }
+        return img;
+      })
+    );
+  };
+
   // Get page dimensions based on page size
   const getPageDimensions = (): { width: number; height: number } => {
     switch (pageSize) {
@@ -149,12 +166,19 @@ const ImagesToPdf: React.FC = () => {
   const compressImage = async (
     dataUrl: string,
     maxDimension: number,
-    quality: number
+    quality: number,
+    rotation: number = 0
   ): Promise<{ dataUrl: string; width: number; height: number }> => {
     return new Promise((resolve, reject) => {
       const img = new Image();
       img.onload = () => {
         let { width, height } = img;
+
+        // Swap dimensions if rotated 90 or 270 degrees
+        const isRotated90 = rotation === 90 || rotation === 270;
+        if (isRotated90) {
+          [width, height] = [height, width];
+        }
 
         // Resize if needed
         if (maxDimension > 0 && (width > maxDimension || height > maxDimension)) {
@@ -169,8 +193,16 @@ const ImagesToPdf: React.FC = () => {
 
         // Create canvas and compress
         const canvas = document.createElement('canvas');
-        canvas.width = width;
-        canvas.height = height;
+        
+        // Set canvas dimensions based on rotation
+        if (isRotated90) {
+          canvas.width = height;
+          canvas.height = width;
+        } else {
+          canvas.width = width;
+          canvas.height = height;
+        }
+        
         const ctx = canvas.getContext('2d');
         
         if (!ctx) {
@@ -178,15 +210,18 @@ const ImagesToPdf: React.FC = () => {
           return;
         }
 
-        ctx.drawImage(img, 0, 0, width, height);
+        // Apply rotation transformation
+        ctx.translate(canvas.width / 2, canvas.height / 2);
+        ctx.rotate((rotation * Math.PI) / 180);
+        ctx.drawImage(img, -img.width / 2, -img.height / 2);
         
         // Convert to JPEG for compression (better than PNG for photos)
         const compressedDataUrl = canvas.toDataURL('image/jpeg', quality);
         
         resolve({
           dataUrl: compressedDataUrl,
-          width,
-          height,
+          width: canvas.width,
+          height: canvas.height,
         });
       };
       img.onerror = reject;
@@ -216,7 +251,8 @@ const ImagesToPdf: React.FC = () => {
           const { dataUrl: compressedDataUrl } = await compressImage(
             imageFile.dataUrl,
             qualitySettings.imageMaxDimension,
-            qualitySettings.imageQuality
+            qualitySettings.imageQuality,
+            imageFile.rotation
           );
 
           // Fetch compressed image
@@ -443,6 +479,7 @@ const ImagesToPdf: React.FC = () => {
                           src={image.dataUrl}
                           alt={image.name}
                           className="w-full h-48 object-contain rounded"
+                          style={{ transform: `rotate(${image.rotation}deg)` }}
                         />
                         <div className="absolute top-2 left-2 bg-green-500 text-black rounded-full w-8 h-8 flex items-center justify-center font-bold text-sm shadow-lg">
                           {index + 1}
@@ -457,7 +494,7 @@ const ImagesToPdf: React.FC = () => {
                           {image.width} × {image.height}px
                         </p>
 
-                        <div className="flex gap-2">
+                        <div className="flex gap-2 mb-2">
                           <button
                             onClick={() => moveImageUp(index)}
                             disabled={index === 0}
@@ -478,6 +515,26 @@ const ImagesToPdf: React.FC = () => {
                           >
                             ✕
                           </button>
+                        </div>
+
+                        <div className="flex gap-2">
+                          <button
+                            onClick={() => rotateImage(image.id, -90)}
+                            className="flex-1 px-2 py-1 bg-blue-600 text-white rounded text-xs hover:bg-blue-700 flex items-center justify-center gap-1"
+                            title="Rotate 90° counter-clockwise"
+                          >
+                            ↺
+                          </button>
+                          <button
+                            onClick={() => rotateImage(image.id, 90)}
+                            className="flex-1 px-2 py-1 bg-blue-600 text-white rounded text-xs hover:bg-blue-700 flex items-center justify-center gap-1"
+                            title="Rotate 90° clockwise"
+                          >
+                            ↻
+                          </button>
+                          <span className="flex-1 px-2 py-1 bg-gray-700 text-gray-300 rounded text-xs flex items-center justify-center">
+                            {image.rotation}°
+                          </span>
                         </div>
                       </div>
                     </div>
@@ -518,6 +575,7 @@ const ImagesToPdf: React.FC = () => {
             <ol className="text-sm text-gray-300 space-y-1 list-decimal list-inside">
               <li>Click "Choose Files" and select multiple images</li>
               <li>Reorder images by dragging or using ▲ ▼ buttons</li>
+              <li>Rotate images using ↺ (counter-clockwise) and ↻ (clockwise) buttons if needed</li>
               <li>Choose page size, image fit mode, and margin</li>
               <li>Click "Create PDF" to download your PDF</li>
             </ol>
